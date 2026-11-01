@@ -1,0 +1,9 @@
+﻿# Robots.txt for Gujarat Institute of Mental Health - Psychiatry Education Platform
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /*/admin
+
+# Sitemaps
+Sitemap: https://gujarat-institute-of-mental-health.in/sitemap.xml
+

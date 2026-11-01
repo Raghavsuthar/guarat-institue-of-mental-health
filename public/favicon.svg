@@ -1,0 +1,23 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="108" fill="#0f766e"/>
+  <!-- Gentle concentric aura circles representing calm thoughts -->
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#14b8a6" stroke-width="6" opacity="0.3" stroke-dasharray="12 12"/>
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#5eead4" stroke-width="4" opacity="0.4"/>
+  
+  <!-- Mind / Lotus harmony emblem -->
+  <g transform="translate(256, 260) scale(1.15)">
+    <!-- Central lotus leaf / mind core -->
+    <path d="M0 -120 C45 -60 70 0 0 90 C-70 0 -45 -60 0 -120 Z" fill="#ffffff" opacity="0.95"/>
+    <!-- Left petal / cerebral hemisphere -->
+    <path d="M-15 -90 C-75 -50 -115 10 -25 75 C-40 20 -35 -40 -15 -90 Z" fill="#ccfbf1" opacity="0.9"/>
+    <!-- Right petal / cerebral hemisphere -->
+    <path d="M15 -90 C75 -50 115 10 25 75 C40 20 35 -40 15 -90 Z" fill="#ccfbf1" opacity="0.9"/>
+    <!-- Lower calming foundation arc -->
+    <path d="M-60 85 C-20 105 20 105 60 85 C30 95 -30 95 -60 85 Z" fill="#fef08a" opacity="0.9"/>
+    <!-- Inner warm spark of consciousness -->
+    <circle cx="0" cy="-20" r="14" fill="#facc15"/>
+  </g>
+  
+  <!-- Subtitle emblem mark -->
+  <text x="256" y="445" text-anchor="middle" fill="#f0fdfa" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="600" letter-spacing="4">Gujarat Institute of Mental Health</text>
+</svg>

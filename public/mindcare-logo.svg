@@ -1,0 +1,19 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60" fill="none">
+  <!-- Stylized Lotus / Dawn Sun Emblem representing MindCare -->
+  <g transform="translate(6, 6)">
+    <!-- Soft outer glow/circle -->
+    <circle cx="24" cy="24" r="23" fill="#F0FDFA" stroke="#CCFBF1" stroke-width="1.5"/>
+    <!-- Rising dawn sun arc -->
+    <path d="M12 28 C12 20, 36 20, 36 28" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <circle cx="24" cy="18" r="4" fill="#F59E0B"/>
+    <!-- Overlapping protective leaf / calming hands motif in Nilgiri Teal -->
+    <path d="M14 34 C18 24, 24 22, 24 22 C24 22, 30 24, 34 34 C28 37, 20 37, 14 34 Z" fill="#0D9488" fill-opacity="0.9"/>
+    <path d="M24 22 V36" stroke="#042F2E" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M17 29 C21 31, 24 33, 24 33" stroke="#CCFBF1" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M31 29 C27 31, 24 33, 24 33" stroke="#CCFBF1" stroke-width="1.2" stroke-linecap="round"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="64" y="32" font-family="Plus Jakarta Sans, -apple-system, sans-serif" font-size="22" font-weight="800" letter-spacing="-0.5px" fill="#1C2430">Mind<tspan fill="#0D9488">Care</tspan></text>
+  <text x="65" y="47" font-family="Plus Jakarta Sans, -apple-system, sans-serif" font-size="10" font-weight="600" letter-spacing="1px" fill="#0F766E">Gujarat Institute of Mental Health</text>
+</svg>
+

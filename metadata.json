@@ -1,0 +1,7 @@
+﻿{
+  "name": "Gujarat Institute of Mental Health - Public Psychiatry Education",
+  "description": "Evidence-based, trilingual public psychiatry and mental health education resource in English, Hindi, and Gujarati by Gujarat Institute of Mental Health.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

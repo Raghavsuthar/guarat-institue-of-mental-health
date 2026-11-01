@@ -1,0 +1,55 @@
+name: Browser and Accessibility Smoke Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master, improve/phase-7-privacy-security]
+
+permissions:
+  contents: read
+
+jobs:
+  browser-quality:
+    name: Production preview smoke tests and axe
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install locked application dependencies
+        run: npm ci
+
+      - name: Validate, type-check, test, and build
+        run: |
+          npm run validate
+          npm run lint
+          npm test
+          npm run build
+
+      - name: Install browser test tools without changing project manifests
+        run: npm install --no-save --package-lock=false @playwright/test @axe-core/playwright
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run browser smoke, responsive, and axe checks
+        run: npx playwright test --config=playwright.config.mjs
+
+      - name: Upload browser test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mindcare-browser-quality
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14
