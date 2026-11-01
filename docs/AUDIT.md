@@ -1,4 +1,4 @@
-﻿# Mindcare Repository Audit
+# Mindcare Repository Audit
 
 **Audit date:** 2026-10-24  
 **Repository:** `gujarat-institute-mental-health/Mindcare`  

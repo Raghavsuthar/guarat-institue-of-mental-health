@@ -1,4 +1,4 @@
-﻿# Gujarat Institute of Mental Health - Public Psychiatry Education Portal
+# Gujarat Institute of Mental Health - Public Psychiatry Education Portal
 
 An evidence-based, trilingual public psychiatry and mental health education platform authored and curated by **Gujarat Institute of Mental Health**. Available in **English**, **हिन्दी (Hindi)**, and **ગુજરાતી (Gujarati)**.
 
