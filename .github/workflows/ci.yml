@@ -43,4 +43,4 @@ jobs:
         run: npm test
 
       - name: Build Production Bundle & Server
-        run: npm run build
+        run: npm run build && test -f dist/server.cjs
