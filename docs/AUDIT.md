@@ -276,3 +276,6 @@ This is a source-level change, not proof of visual acceptance. Screenshots at 36
 - Three defects were reproduced: missing Express production bundle in the build pipeline, Gemini client/model configuration mismatch across backend runtimes, and a false-negative mobile screener E2E regex.
 - Fixes are isolated in `fix/website-runtime-bugs-2026-11` / PR #8. CI on the pre-cleanup head passed build and unit checks; final-head workflows are pending verification.
 - No live deployment or provider credentials were accessed. Gemini/Upstash production integration, Docker startup, full route matrix, and PWA/offline behavior remain unverified.
+
+
+- Runtime audit follow-up: crisis detection now includes common high-signal English expressions; the local `.env` bootstrap was corrected for Vite and Express; CI now starts the built Express server and checks `/api/health`. See `docs/WEBSITE_RUNTIME_AUDIT_2026-11.md` and PR #8.
