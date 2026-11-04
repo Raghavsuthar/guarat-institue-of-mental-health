@@ -7,13 +7,14 @@
 
 ## Executive findings
 
-Three reproducible defects were identified. All three have targeted fixes in this branch.
+Five reproducible defects were identified. All five have targeted fixes in this branch.
 
 | Severity | Finding | Evidence | Fix |
 |---|---|---|---|
 | High | Self-hosted/Docker build did not generate the server bundle required by its start command | `package.json` ran only `vite build`; Dockerfile and `npm start` required `dist/server.cjs`; Vite config had no production hook compiling `server.ts` | Build now validates content, generates sitemap, builds Vite, and bundles `server.ts` with esbuild to `dist/server.cjs`; Docker asserts the artifact exists |
 | High | Gemini client was instantiated without explicitly passing the server API key and used an unverified model identifier | Same configuration appeared in Vercel `api/qa.ts`, Express `server.ts`, and Vite dev API; official Google Gen AI SDK docs require an API key for Gemini Developer API | Pass `process.env.GEMINI_API_KEY`, use documented `gemini-flash-latest` by default, allow server-only `GEMINI_MODEL` override |
 | High | Crisis detection missed common high-signal English phrases (e.g. “I am suicidal”, “I want to hurt myself”, “I took too many pills”, “I am not safe with myself”) | Existing API-core tests failed on these phrases; the helper only matched a narrower set of substrings | Added explicit phrases and regression coverage through the existing test cases |
+| Medium | Local `.env` values were not loaded into the Vite middleware / direct Express process environment | Vite config and `server.ts` read `process.env`, but neither runtime bootstrapped the documented `.env` file; Vite 6 docs confirm `.env` files are not loaded into config evaluation automatically | Load server-side environment values with `dotenv/config` in Vite config and Express entry point; document optional `GEMINI_MODEL` |
 | Medium | Mobile screener E2E assertion used an over-escaped regular expression | Latest main browser workflow `41790529609`: 10 passed, 1 failed; trace/log showed the app tap set `aria-pressed=true`, but progress assertion searched for a literal `\\d` | Corrected the regex to match the numeric answered count |
 
 ## Changes made
@@ -26,6 +27,8 @@ Three reproducible defects were identified. All three have targeted fixes in thi
 - `package.json`: complete production build sequence including Express server bundle.
 - `Dockerfile`: fail the image build if `dist/server.cjs` is absent.
 - `e2e/self-assessment.spec.mjs`: correct mobile progress matcher.
+- `.env.example`: document the optional server-side Gemini model override.
+- `.github/workflows/ci.yml`: smoke-test the production Express bundle by starting it and checking `/api/health`.
 - `tests/qa-safety.test.ts`: cover API method/input/language validation, crisis short-circuit, and model configuration.
 
 ## Documentation consulted
@@ -42,6 +45,8 @@ Three reproducible defects were identified. All three have targeted fixes in thi
 - Fix-branch CI run `41804358885` passed validation, TypeScript, unit tests, and the production client/server build before the final shared-prompt cleanup commits. A later run exposed missing crisis phrases in an existing regression test; those phrases have now been added and the latest-head workflow is running.
 - The browser workflow and CI were re-triggered after the final commits; final head results must be checked before merge.
 - No real Gemini request was made: deployment secrets are not read or exposed during this audit.
+- Vite 6 Context7 documentation confirms that `.env` files are not loaded by default while evaluating `vite.config.ts`; the explicit server-side dotenv bootstrap closes that gap.
+- Final CI now includes an Express startup/health check so the generated bundle is exercised, not merely checked for existence.
 - No live Vercel/Docker deployment was changed or claimed.
 
 ## Remaining risks / not yet verified
