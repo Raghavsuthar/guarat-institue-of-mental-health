@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Validate, Lint & Build
+    name: Validate, Test & Build
     runs-on: ubuntu-latest
 
     steps:
@@ -19,28 +19,27 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
-      - name: Install Dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci || npm install
-          else
-            npm install
-          fi
+      - name: Install locked Dependencies
+        run: npm ci
 
       - name: Audit dependency vulnerabilities (report-only)
         run: |
           npm audit --json > /tmp/npm-audit.json || true
           node -e "const a=require('/tmp/npm-audit.json'); console.log(JSON.stringify({metadata:a.metadata?.vulnerabilities, advisories:Object.entries(a.vulnerabilities||{}).map(([name,v])=>({name,severity:v.severity,range:v.range,fixAvailable:v.fixAvailable,via:v.via.map(x=>typeof x==='string'?x:{name:x.name,title:x.title,url:x.url,range:x.range})}))},null,2))"
 
-      - name: Validate Trilingual Content Integrity
-        run: npm run validate
-
-      - name: Check TypeScript Types & Linting
+      - name: Type-check
         run: npm run lint
 
       - name: Run API Safety Tests
         run: npm test
 
-      - name: Build Production Bundle & Server
+      - name: Build Production Frontend and Express Server
         run: npm run build
+
+      - name: Smoke-test built production server
+        run: npm run test:server
+
+      - name: Build Docker image
+        run: docker build --tag gimh-portal:ci .
