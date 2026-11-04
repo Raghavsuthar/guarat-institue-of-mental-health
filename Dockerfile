@@ -13,7 +13,7 @@ RUN npm ci
 COPY . .
 
 # Run validation, sitemap generation, and production builds
-RUN npm run build
+RUN npm run build && test -s dist/server.cjs
 
 # Stage 2: Production Runtime
 FROM node:22-alpine AS runner
