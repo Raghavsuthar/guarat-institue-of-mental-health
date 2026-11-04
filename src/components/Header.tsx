@@ -128,7 +128,7 @@ export const Header: React.FC<HeaderProps> = ({
               {currentLang === 'en' ? 'Search topics' : currentLang === 'hi' ? 'खोजें...' : 'શોધો...'}
             </span>
             <kbd className="hidden md:inline-block px-1.5 py-0.5 text-[10px] font-mono bg-white text-slate-500 rounded border border-slate-200 shadow-2xs">
-              /
+              Ctrl/⌘ K
             </kbd>
           </button>
 
