@@ -10,7 +10,7 @@
 - **23/23** published condition IDs have a matching evidence-guide key in the repository snapshot.
 - The existing automated content validator checks selected localized fields for non-empty English, Hindi, and Gujarati strings. It does not verify semantic translation equivalence, claim-to-source support, current guideline status, or clinical correctness.
 - The evidence-guide test checks guide coverage, populated translations, and basic HTTPS/source metadata. It does not prove that each cited source supports every claim.
-- Targeted copy corrections in this phase cover **17 condition records**: depression, bipolar disorder, schizophrenia, anorexia nervosa, bulimia nervosa, binge-eating disorder, ADHD, autism, social anxiety disorder, specific phobia, illness anxiety disorder, PMDD, personality-disorder overview, and perinatal/postpartum depression and anxiety.
+- Targeted copy corrections in this phase cover **17 condition records**: depression, bipolar disorder, schizophrenia, anorexia nervosa, bulimia nervosa, binge-eating disorder, ADHD, autism, social anxiety disorder, specific phobia, illness anxiety disorder, PMDD, personality-disorder overview, perinatal/postpartum depression and anxiety, generalized anxiety disorder, panic disorder, and insomnia.
 - Six records received no targeted copy edits in this phase; all 23 still require claim-by-claim source review.
 - This is an editorial and source-inspection audit, **not** independent clinical sign-off or fluent clinical-language review. No reviewer credential or clinical approval is claimed.
 
@@ -48,6 +48,7 @@
 2. **Treatment outcomes:** Removed unsupported fixed cure, remission, or response percentages and replaced them with cautious descriptions of evidence-based options and variable response.
 3. **Medication discontinuation:** Replaced inevitable-relapse language with a risk-based explanation and advice to discuss changes with the treating clinician.
 4. **Autism assessment:** Clarified that structured tools contribute to a comprehensive assessment and must not be used alone to diagnose autism.
+5. **Additional anxiety and sleep outcomes:** Removed fixed treatment-response/remission percentages from generalized anxiety disorder, panic disorder, and insomnia copy.
 5. **Perinatal safety:** Replaced blanket statements about medication being completely safe during breastfeeding with individualized consideration of maternal symptoms, previous response, infant factors, benefits, and risks.
 6. **Screening and investigations:** Clarified that screening is not diagnosis and that laboratory investigations should be guided by clinical history/examination rather than described as mandatory for everyone.
 
