@@ -43,7 +43,7 @@ Added trilingual public-facing evidence summaries for the ten existing condition
 
 - Audited all 23 published condition IDs and confirmed a matching evidence-guide key for each.
 - Added `docs/CONDITION_CONTENT_AUDIT_2026-11.md` with the complete inventory, risk priorities, source links, corrections, and pending review items.
-- Corrected overconfident or unsupported wording in 14 records: depression, bipolar disorder, schizophrenia, anorexia nervosa, bulimia nervosa, binge-eating disorder, ADHD, autism, social anxiety disorder, specific phobia, illness anxiety disorder, PMDD, personality-disorder overview, and postpartum/perinatal depression and anxiety.
+- Corrected overconfident or unsupported wording in 17 records: depression, bipolar disorder, schizophrenia, anorexia nervosa, bulimia nervosa, binge-eating disorder, ADHD, autism, social anxiety disorder, specific phobia, illness anxiety disorder, PMDD, personality-disorder overview, postpartum/perinatal depression and anxiety, generalized anxiety disorder, panic disorder, and insomnia.
 - Removed fixed cure, remission, or response percentages where they were presented without adequate claim-level qualification; softened deterministic genetic and single-neurotransmitter explanations.
 - Clarified that autism assessment tools do not independently establish diagnosis; screening is not diagnosis; and breastfeeding medication decisions require individualized review.
 - Added `tests/clinical-copy-safety.test.ts` to prevent reintroduction of the identified high-risk overclaims.
