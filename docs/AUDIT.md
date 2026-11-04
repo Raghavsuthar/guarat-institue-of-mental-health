@@ -273,7 +273,7 @@ This is a source-level change, not proof of visual acceptance. Screenshots at 36
 ## 2026-11-04 — Website runtime and deployment audit
 
 - See `docs/WEBSITE_RUNTIME_AUDIT_2026-11.md` for the complete scope, evidence, fixes, and release gates.
-- Three defects were reproduced: missing Express production bundle in the build pipeline, Gemini client/model configuration mismatch across backend runtimes, and a false-negative mobile screener E2E regex.
+- Ten issues were identified across the production build, Gemini configuration, crisis phrase coverage, environment loading, screener copy/tests, README accuracy, generated-answer labeling, and search keyboard/dialog accessibility. See `docs/WEBSITE_RUNTIME_AUDIT_2026-11.md` for evidence and corrections.
 - Fixes are isolated in `fix/website-runtime-bugs-2026-11` / PR #8. CI on the pre-cleanup head passed build and unit checks; final-head workflows are pending verification.
 - No live deployment or provider credentials were accessed. Gemini/Upstash production integration, Docker startup, full route matrix, and PWA/offline behavior remain unverified.
 
