@@ -116,7 +116,7 @@ test('self-reflection cards and scale answers respond to real mobile taps', asyn
 test('self-reflection notice respects the different recall periods of each tool', async ({ page }) => {
   for (const language of ['en', 'hi', 'gu']) {
     await page.goto(`/${language}/interactive`);
-    await expect(page.getByText(/Each questionnaire uses its own recall period|हर प्रश्नावली में उसकी अपनी बताई गई समय-अवधि|દરેક પ્રશ્નાવલીમાં તેમાં જણાવેલો પોતાનો સમયગાળો/i)).toBeVisible();
+    await expect(page.getByText(/Each questionnaire uses its own (?:stated )?recall period|हर प्रश्नावली में उसकी अपनी बताई गई समय-अवधि|દરેક પ્રશ્નાવલીમાં તેમાં જણાવેલો પોતાનો સમયગાળો/i)).toBeVisible();
     await expect(page.getByText(/Scores reflect subjective emotional distress over the past 2 weeks/i)).toHaveCount(0);
   }
 });
