@@ -263,7 +263,7 @@ This is a source-level change, not proof of visual acceptance. Screenshots at 36
 
 - Static inventory confirms 23 main condition records and 23 matching evidence-guide keys.
 - Existing validation checks selected localized fields for presence, not semantic translation parity or claim-level clinical correctness.
-- Targeted editorial corrections are being made in 14 condition records; the full inventory and the nine records still awaiting focused claim review are documented in `docs/CONDITION_CONTENT_AUDIT_2026-11.md`.
+- Targeted editorial corrections are being made in 17 condition records; the full inventory and the six records without targeted copy edits are documented in `docs/CONDITION_CONTENT_AUDIT_2026-11.md`.
 - Added a regression test for high-risk cure/response guarantees, deterministic genetic language, inevitable-relapse claims, diagnostic-tool accuracy claims, and blanket breastfeeding-safety wording.
 - The new test was observed failing on the original content for seven pattern groups. Final CI status after the corrections remains pending.
 - Current sources opened for the targeted corrections include WHO depression/mhGAP, NICE bipolar/eating disorders/ADHD/autism/social anxiety/OCD-BDD guidance, ACOG perinatal guidelines, and NHS phobia guidance.
