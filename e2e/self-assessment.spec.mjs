@@ -6,7 +6,7 @@ const tools = [
   { id: 'mood-reflection', heading: /Mood Pattern Reflection/i },
   { id: 'alcohol-reflection', heading: /Alcohol Use Reflection/i },
   { id: 'asrs', heading: /ASRS/i },
-  { id: 'isi', heading: /Insomnia Severity Index/i },
+  { id: 'isi', heading: /Sleep Difficulty Reflection/i },
   { id: 'dast10', heading: /DAST-10/i },
   { id: 'ptsd-reflection', heading: /PTSD Symptom Reflection/i },
   { id: 'scoff', heading: /SCOFF/i },
@@ -35,7 +35,12 @@ test('every self-reflection tool opens, accepts answers, shows results and can b
     }
     await expect(dialog.getByText(new RegExp(`${questionCount} of ${questionCount} answered`))).toBeVisible();
     await dialog.getByRole('button', { name: /View Educational Reflection/i }).click();
-    await expect(dialog.getByText(/Educational Reflection Score|Positive Responses/i)).toBeVisible();
+    if (['phq9', 'gad7', 'asrs', 'dast10', 'scoff'].includes(tools[index].id)) {
+      await expect(dialog.getByText(/Educational Reflection Score|Positive Responses/i)).toBeVisible();
+    } else {
+      await expect(dialog.getByText('Your reflections')).toBeVisible();
+      await expect(dialog.getByText(/No validated clinical score or severity category is calculated/i)).toBeVisible();
+    }
 
     await dialog.getByRole('button', { name: /Close dialog/i }).click();
     await expect(dialog).toHaveCount(0);
@@ -63,4 +68,19 @@ test('self-reflection tools open in Hindi and Gujarati', async ({ page }) => {
     await expect(page.getByRole('dialog')).toBeVisible();
     await page.getByRole('button', { name: /Close dialog/i }).click();
   }
+});
+
+
+test('self-harm endorsement shows support before questionnaire completion', async ({ page }) => {
+  await page.goto('/en/interactive');
+  await page.getByRole('button', { name: /Launch Reflection Tool/i }).first().click();
+
+  const dialog = page.getByRole('dialog');
+  const selfHarmQuestion = dialog.getByTestId('screener-question').nth(8);
+  await selfHarmQuestion.getByTestId('screener-answer').nth(1).click();
+
+  const safetyAlert = dialog.getByRole('alert');
+  await expect(safetyAlert).toContainText(/You do not need to wait for the questionnaire result/i);
+  await expect(safetyAlert.getByRole('link', { name: /Call 112/i })).toHaveAttribute('href', 'tel:112');
+  await expect(safetyAlert.getByRole('link', { name: /Call 14416/i })).toHaveAttribute('href', 'tel:14416');
 });
