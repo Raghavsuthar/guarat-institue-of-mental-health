@@ -107,7 +107,7 @@ test('self-reflection cards and scale answers respond to real mobile taps', asyn
     const firstAnswer = dialog.getByTestId('screener-answer').first();
     await firstAnswer.tap();
     await expect(firstAnswer).toHaveAttribute('aria-pressed', 'true');
-    await expect(dialog.getByText(/1 of \\d+ answered/i)).toBeVisible();
+    await expect(dialog.getByText(/1 of \d+ answered/i)).toBeVisible();
   } finally {
     await context.close();
   }
