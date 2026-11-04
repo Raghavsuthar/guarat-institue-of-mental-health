@@ -4,6 +4,7 @@ import { Language } from '../types';
 import { screenersData } from '../data/assessments';
 import { translations } from '../data/translations';
 import { updatePageSEO } from '../utils/seo';
+import { getAssessmentCategory } from '../utils/assessmentSafety';
 
 interface InteractiveViewProps {
   currentLang: Language;
@@ -97,6 +98,14 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
 
               <p className="text-sm text-stone-600 leading-relaxed">
                 {tool.purpose[currentLang]}
+              </p>
+
+              <p className="text-xs font-medium text-stone-500">
+                {getAssessmentCategory(tool.id) === 'recognized'
+                  ? (currentLang === 'en' ? 'Recognized screening instrument · non-diagnostic' : currentLang === 'hi' ? 'मान्यता प्राप्त स्क्रीनिंग टूल · निदान नहीं' : 'ઓળખાયેલ સ્ક્રીનિંગ સાધન · નિદાન નથી')
+                  : getAssessmentCategory(tool.id) === 'pending-review'
+                  ? (currentLang === 'en' ? 'Educational reflection · pending item and permission review' : currentLang === 'hi' ? 'शैक्षणिक आत्म-अवलोकन · प्रश्न और अनुमति की समीक्षा बाकी' : 'શૈક્ષણિક આત્મ-અવલોકન · પ્રશ્નો અને પરવાનગીની સમીક્ષા બાકી')
+                  : (currentLang === 'en' ? 'Adapted educational reflection · no validated clinical cut-off' : currentLang === 'hi' ? 'अनुकूलित शैक्षणिक आत्म-अवलोकन · मान्य नैदानिक कट-ऑफ नहीं' : 'બદલાયેલ શૈક્ષણિક આત્મ-અવલોકન · માન્ય તબીબી કટ-ઓફ નથી')}
               </p>
 
               <div className="pt-2 border-t border-stone-100 text-xs text-stone-500">
