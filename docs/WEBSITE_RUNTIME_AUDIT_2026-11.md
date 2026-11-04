@@ -7,14 +7,16 @@
 
 ## Executive findings
 
-Eight reproducible or directly verifiable issues were identified. Targeted corrections are included in this branch; final browser workflow status must be checked before merge.
+Ten reproducible or directly verifiable issues were identified. Targeted corrections are included in this branch; final browser workflow status must be checked before merge.
 
 | Severity | Finding | Evidence | Correction |
 |---|---|---|---|
 | High | Self-hosted/Docker build did not generate the server bundle required by its start command | `package.json` ran only `vite build`; Dockerfile and `npm start` required `dist/server.cjs` | Build now validates content, generates sitemap, builds Vite, and bundles `server.ts` with esbuild; CI asserts the artifact and smoke-tests Express health |
 | High | Gemini client was instantiated without explicitly passing the server API key and used an unverified model identifier | Same configuration appeared in Vercel `api/qa.ts`, Express `server.ts`, and Vite dev API | Pass server-side `GEMINI_API_KEY`; use documented `gemini-flash-latest` by default with a server-only `GEMINI_MODEL` override |
 | High | Crisis detection missed common high-signal English phrases | New regression cases for “I am suicidal”, “I want to hurt myself”, “I took too many pills”, and “I am not safe with myself” failed before the term-list correction | Add the missed phrases and keep English, Hindi, Gujarati, and transliteration coverage |
-| Medium | Mobile screener E2E assertion used an over-escaped regular expression | Main browser run `41790529609`: 10 passed, 1 failed; trace showed the tap set `aria-pressed=true`, while the assertion searched for a literal `\\d` | Correct the matcher to accept the numeric answered count |
+| Medium | Local server secrets were not loaded from the documented `.env` file in Vite/Express runtimes | Vite config and direct Express startup read `process.env`, but did not bootstrap the `.env` file; Vite 6 docs confirm env files are not loaded during config evaluation by default | Load server-side env values with `dotenv/config` in Vite config and Express entry point |
+| Medium | Search dialog lacked an accessible name and Escape-key dismissal | The dialog had `role=dialog`/`aria-modal` but no accessible name or Escape listener, despite displaying an “ESC” close affordance | Add a localized accessible name from `t.search.title` and close the dialog on Escape |
+| Medium | Mobile screener E2E assertion used an over-escaped regular expression | Main browser run `41790529609`: 10 passed, 1 failed; trace showed the tap set `aria-pressed=true`, while the assertion searched for a literal `\\d`. A second stale assertion omitted the word “stated” from the UI copy | Correct both matchers without changing working answer-selection UI |
 | Medium | Shared self-reflection notice incorrectly claimed every tool summarized the previous two weeks | The page contains tools with different recall periods, including ASRS (six months) and DAST-10 (twelve months); the new browser regression test failed before copy correction | Replace the blanket statement with trilingual wording that each questionnaire uses its own stated recall period |
 | Medium | README overstated clinical validation and listed instruments not present in the current app | README described “validated screeners” and named AUDIT-C/CAGE, while the app labels its adapted tools as educational and not independently validated | Update the feature description to distinguish established-instrument references from adapted, non-diagnostic reflections |
 | Low | Q&A assistant badge implied generated answers were clinically verified | UI label said “Verified Psychiatric Education” although answers are generated and are not independently verified | Change the label to “General educational information” |
@@ -26,7 +28,9 @@ Eight reproducible or directly verifiable issues were identified. Targeted corre
 - `server.ts`: explicit key, shared model and safety prompt, and server-only dotenv loading.
 - `server/apiPlugin.ts`: same Gemini model/key/prompt configuration for local Vite API parity.
 - `vite.config.ts`: load server-only `.env` values for local development without exposing them through client variables.
-- `src/utils/crisisDetection.ts`: add common high-signal English self-harm and overdose expressions.
+- `src/utils/crisisDetection.ts`: add common high-signal English self-harm and overdose expressions, then remove duplicate entries.
+- `src/components/SearchModal.tsx`: add localized dialog naming and Escape-key dismissal.
+- `vite.config.ts` and `server.ts`: load documented server-only `.env` values without exposing secrets to the client.
 - `package.json`: validate content, generate sitemap, build Vite, and bundle the Express server to `dist/server.cjs`.
 - `Dockerfile`: fail the image build if the server bundle is absent.
 - `e2e/self-assessment.spec.mjs`: correct the mobile progress matcher and add a trilingual recall-period regression test.
@@ -51,7 +55,8 @@ Eight reproducible or directly verifiable issues were identified. Targeted corre
 - The new search-shortcut browser test failed against the old header hint at run `41805363000` (`Expected: Ctrl/⌘ K`, `Received: /`), as expected.
 - Fix-branch CI run `41804912023` passed content validation, TypeScript, unit tests, and the production frontend/server build.
 - On the later head, run `41805040247` completed validation, type-checking, unit tests, production build, and the Express health smoke-test step successfully; final job completion and browser workflow should still be checked before merge.
-- The public Vercel `/api/health` endpoint returned HTTP 200 during the audit. The Vercel runtime-errors view showed no runtime errors in the selected seven-day window. This does not verify Gemini calls, Upstash connectivity, or browser-side exceptions.
+- CI on head `aafc573` passed content validation, TypeScript, unit tests, production client/server build, and the Express `/api/health` smoke test. The browser/accessibility workflow is still running.
+- The Vercel check for the latest PR head is failing because the account hit its build-rate limit; this is an external preview-build blocker, not evidence of an application compile failure. No live preview for the latest head is available.
 - No real Gemini request was made because deployment secrets were not accessed. No production deployment or environment settings were changed.
 
 ## Remaining risks / not yet verified
