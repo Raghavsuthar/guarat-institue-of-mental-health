@@ -7,7 +7,7 @@
 
 ## Executive findings
 
-Seven reproducible or directly verifiable issues were identified. Targeted corrections are included in this branch; final browser workflow status must be checked before merge.
+Eight reproducible or directly verifiable issues were identified. Targeted corrections are included in this branch; final browser workflow status must be checked before merge.
 
 | Severity | Finding | Evidence | Correction |
 |---|---|---|---|
@@ -18,6 +18,7 @@ Seven reproducible or directly verifiable issues were identified. Targeted corre
 | Medium | Shared self-reflection notice incorrectly claimed every tool summarized the previous two weeks | The page contains tools with different recall periods, including ASRS (six months) and DAST-10 (twelve months); the new browser regression test failed before copy correction | Replace the blanket statement with trilingual wording that each questionnaire uses its own stated recall period |
 | Medium | README overstated clinical validation and listed instruments not present in the current app | README described “validated screeners” and named AUDIT-C/CAGE, while the app labels its adapted tools as educational and not independently validated | Update the feature description to distinguish established-instrument references from adapted, non-diagnostic reflections |
 | Low | Q&A assistant badge implied generated answers were clinically verified | UI label said “Verified Psychiatric Education” although answers are generated and are not independently verified | Change the label to “General educational information” |
+| Low | Search keyboard hint did not match the actual shortcut | Header displayed `/`, while the global key handler only listened for Ctrl/⌘+K; the new browser regression test failed on the mismatch | Change the visible hint to `Ctrl/⌘ K`; retain the existing handler |
 
 ## Changes made
 
@@ -32,6 +33,7 @@ Seven reproducible or directly verifiable issues were identified. Targeted corre
 - `src/views/InteractiveView.tsx`: correct the recall-period notice in English, Hindi, and Gujarati.
 - `README.md`: remove unsupported “validated screener” claims and remove tools not present in the app.
 - `src/components/EducationalQAAssistant.tsx`: remove the implication that generated answers are clinically verified.
+- `src/components/Header.tsx`: make the displayed search shortcut match the existing Ctrl/⌘+K handler.
 - `tests/api-core.test.ts` and `tests/qa-safety.test.ts`: add crisis-expression and Q&A validation/configuration coverage.
 
 ## Documentation consulted
@@ -46,6 +48,7 @@ Seven reproducible or directly verifiable issues were identified. Targeted corre
 - Main baseline browser workflow `41790529609` failed only on the malformed mobile progress assertion (10 passed, 1 failed).
 - The recall-period browser regression failed on the old copy at run `41804521410`, as expected.
 - The new crisis-expression unit test failed against the old helper at run `41804667439`, as expected.
+- The new search-shortcut browser test failed against the old header hint at run `41805363000` (`Expected: Ctrl/⌘ K`, `Received: /`), as expected.
 - Fix-branch CI run `41804912023` passed content validation, TypeScript, unit tests, and the production frontend/server build.
 - On the later head, run `41805040247` completed validation, type-checking, unit tests, production build, and the Express health smoke-test step successfully; final job completion and browser workflow should still be checked before merge.
 - The public Vercel `/api/health` endpoint returned HTTP 200 during the audit. The Vercel runtime-errors view showed no runtime errors in the selected seven-day window. This does not verify Gemini calls, Upstash connectivity, or browser-side exceptions.
