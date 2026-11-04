@@ -3,11 +3,11 @@
 **Repository:** `Raghavsuthar/guarat-institue-of-mental-health`  
 **Audited baseline:** `0cd15779118b51d3be37d5b38f2ebbc9e2b98db6`  
 **Working branch:** `fix/website-runtime-bugs-2026-11`  
-**Scope:** source-level review of the React application, API execution paths, build/deployment configuration, clinical self-reflection copy, existing tests, live Vercel health response, and GitHub Actions evidence.
+**Scope:** source-level review of the React application, API execution paths, build/deployment configuration, clinical self-reflection copy, existing tests, GitHub Actions evidence and deployment-check status.
 
 ## Executive findings
 
-Ten reproducible or directly verifiable issues were identified. Targeted corrections are included in this branch; final browser workflow status must be checked before merge.
+Eleven reproducible or directly verifiable issues were identified. Targeted corrections are included in this branch; final browser workflow status must be checked before merge.
 
 | Severity | Finding | Evidence | Correction |
 |---|---|---|---|
@@ -15,19 +15,19 @@ Ten reproducible or directly verifiable issues were identified. Targeted correct
 | High | Gemini client was instantiated without explicitly passing the server API key and used an unverified model identifier | Same configuration appeared in Vercel `api/qa.ts`, Express `server.ts`, and Vite dev API | Pass server-side `GEMINI_API_KEY`; use documented `gemini-flash-latest` by default with a server-only `GEMINI_MODEL` override |
 | High | Crisis detection missed common high-signal English phrases | New regression cases for “I am suicidal”, “I want to hurt myself”, “I took too many pills”, and “I am not safe with myself” failed before the term-list correction | Add the missed phrases and keep English, Hindi, Gujarati, and transliteration coverage |
 | Medium | Local server secrets were not loaded from the documented `.env` file in Vite/Express runtimes | Vite config and direct Express startup read `process.env`, but did not bootstrap the `.env` file; Vite 6 docs confirm env files are not loaded during config evaluation by default | Load server-side env values with `dotenv/config` in Vite config and Express entry point |
-| Medium | Search dialog lacked an accessible name and Escape-key dismissal | The dialog had `role=dialog`/`aria-modal` but no accessible name or Escape listener, despite displaying an “ESC” close affordance | Add a localized accessible name from `t.search.title` and close the dialog on Escape |
 | Medium | Mobile screener E2E assertion used an over-escaped regular expression | Main browser run `41790529609`: 10 passed, 1 failed; trace showed the tap set `aria-pressed=true`, while the assertion searched for a literal `\\d`. A second stale assertion omitted the word “stated” from the UI copy | Correct both matchers without changing working answer-selection UI |
 | Medium | Shared self-reflection notice incorrectly claimed every tool summarized the previous two weeks | The page contains tools with different recall periods, including ASRS (six months) and DAST-10 (twelve months); the new browser regression test failed before copy correction | Replace the blanket statement with trilingual wording that each questionnaire uses its own stated recall period |
 | Medium | README overstated clinical validation and listed instruments not present in the current app | README described “validated screeners” and named AUDIT-C/CAGE, while the app labels its adapted tools as educational and not independently validated | Update the feature description to distinguish established-instrument references from adapted, non-diagnostic reflections |
 | Low | Q&A assistant badge implied generated answers were clinically verified | UI label said “Verified Psychiatric Education” although answers are generated and are not independently verified | Change the label to “General educational information” |
-| Medium | Search and dialog accessibility defects | Header displayed `/` while the handler listened for Ctrl/⌘+K; its accessible name omitted visible shortcut text and failed axe `label-content-name-mismatch`. Search dialog also lacked an accessible name and Escape dismissal. | Match the visible hint and accessible name to `Ctrl/⌘ K`; give the search dialog a localized accessible name and close it on Escape |
+| Low | Search shortcut hint did not match the actual keyboard handler | Header displayed `/`, while the global key handler listened for Ctrl/⌘+K | Update the visible hint to `Ctrl/⌘ K` |
+| Medium | Header search button's accessible name omitted visible shortcut text | Axe `label-content-name-mismatch` identified the header search button; its accessible name did not include all visible label text | Make the accessible name match the visible label and shortcut exactly |
+| Medium | Search dialog lacked an accessible name and Escape-key dismissal | The dialog had `role=dialog`/`aria-modal` but no accessible name or Escape listener, despite displaying an “ESC” close affordance | Add a localized accessible name from `t.search.title` and close the dialog on Escape |
 
 ## Changes made
 
 - `api/qa.ts`: explicit Gemini API key, documented default model alias, configurable server-side model constant, shared education-only safety instruction.
 - `server.ts`: explicit key, shared model and safety prompt, and server-only dotenv loading.
 - `server/apiPlugin.ts`: same Gemini model/key/prompt configuration for local Vite API parity.
-- `vite.config.ts`: load server-only `.env` values for local development without exposing them through client variables.
 - `src/utils/crisisDetection.ts`: add common high-signal English self-harm and overdose expressions, then remove duplicate entries.
 - `src/components/SearchModal.tsx`: add localized dialog naming and Escape-key dismissal.
 - `vite.config.ts` and `server.ts`: load documented server-only `.env` values without exposing secrets to the client.
