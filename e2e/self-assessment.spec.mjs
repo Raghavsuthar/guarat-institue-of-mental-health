@@ -27,8 +27,15 @@ test('every self-reflection tool opens, accepts answers, shows results and can b
     await expect(dialog.getByRole('heading').first()).toBeVisible();
     await expect(dialog.getByText(/0 of \d+ answered/i)).toBeVisible();
 
-    const firstQuestion = dialog.locator('button[aria-pressed]').first();
-    await expect(firstQuestion).toBeVisible();
+    const questions = dialog.getByTestId('screener-question');
+    await expect(questions.first()).toBeVisible();
+    const questionCount = await questions.count();
+    for (let questionIndex = 0; questionIndex < questionCount; questionIndex += 1) {
+      await questions.nth(questionIndex).getByTestId('screener-answer').first().click();
+    }
+    await expect(dialog.getByText(new RegExp(`${questionCount} of ${questionCount} answered`))).toBeVisible();
+    await dialog.getByRole('button', { name: /View Educational Reflection/i }).click();
+    await expect(dialog.getByText(/Educational Reflection Score|Positive Responses/i)).toBeVisible();
 
     await dialog.getByRole('button', { name: /Close dialog/i }).click();
     await expect(dialog).toHaveCount(0);
