@@ -20,12 +20,12 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
 
   useEffect(() => {
     updatePageSEO({
-      title: currentLang === 'en' ? 'Educational Mental Health Screeners (PHQ-9 & GAD-7)' : currentLang === 'hi' ? 'मानसिक स्वास्थ्य आत्म-अवलोकन टूल (PHQ-9 व GAD-7)' : 'આત્મ-મૂલ્યાંકન પ્રશ્નાવલિ (PHQ-9 અને GAD-7)',
+      title: currentLang === 'en' ? 'Mental Health Self-Reflection Tools' : currentLang === 'hi' ? 'मानसिक स्वास्थ्य आत्म-अवलोकन टूल' : 'માનસિક સ્વ-અવલોકન સાધનો',
       description: currentLang === 'en'
-        ? 'Validated depression and anxiety questionnaires (PHQ-9 and GAD-7) for self-reflection and preparing for a doctor consultation.'
+        ? 'Educational questionnaires to help organize experiences before speaking with a healthcare professional. Adapted tools are not validated clinical screeners and their scores are not diagnostic.'
         : currentLang === 'hi'
-        ? 'डिप्रेशन और चिंता के लक्षणों को समझने के लिए प्रमाणित प्रश्नावली।'
-        : 'ડિપ્રેશન અને ચિંતાના લક્ષણોની સમજ માટે પ્રશ્નાવલિ.',
+        ? 'ये प्रश्नावलियाँ स्वास्थ्य विशेषज्ञ से बातचीत की तैयारी में आपके अनुभवों को व्यवस्थित करने में मदद करती हैं। अनुकूलित प्रश्नों के अंक नैदानिक कट-ऑफ नहीं हैं।'
+        : 'આરોગ્ય નિષ્ણાત સાથે વાત કરતાં પહેલાં તમારા અનુભવો સમજવા માટે શૈક્ષણિક પ્રશ્નાવલીઓ. બદલાયેલા સાધનોના ગુણ નિદાન નથી.',
       path: 'interactive',
       lang: currentLang,
     });
@@ -36,17 +36,17 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
       {/* Header */}
       <div className="space-y-2">
         <span className="text-xs font-semibold uppercase tracking-wider text-stone-500">
-          {currentLang === 'en' ? 'Validated Reflection Instruments' : currentLang === 'hi' ? 'प्रमाणित आत्म-मूल्यांकन' : 'સ્વ-મૂલ્યાંકન સાધનો'}
+          {currentLang === 'en' ? 'Self-Reflection Tools' : currentLang === 'hi' ? 'आत्म-अवलोकन टूल' : 'આત્મ-અવલોકન સાધનો'}
         </span>
         <h1 className="text-2xl sm:text-3xl font-semibold text-[#1c2430] tracking-tight">
           {t.nav.interactive}
         </h1>
         <p className="text-sm sm:text-base text-stone-600 max-w-3xl leading-relaxed">
           {currentLang === 'en'
-            ? 'Standardized psychological self-report instruments (PHQ-9 for depressive symptoms and GAD-7 for generalized anxiety). These tools are provided strictly for education and structured reflection to help you prepare for clinical discussions with a doctor.'
+            ? 'These questionnaires help you organize experiences and concerns before a conversation with a healthcare professional. Adapted tools are educational only and must not be interpreted using clinical cut-offs.'
             : currentLang === 'hi'
-            ? 'डिप्रेशन के लक्षणों के लिए PHQ-9 और चिंता के लिए GAD-7। यह टूल केवल आत्म-अवलोकन के लिए है ताकि आप समझ सकें कि डॉक्टर से अपने मन की स्थिति कैसे साझा करें।'
-            : 'ડિપ્રેશન માટે PHQ-9 અને ચિંતા માટે GAD-7. આ ટૂલ માત્ર તમારા લક્ષણો સમજવા અને ડૉક્ટર સમક્ષ રજૂ કરવા માટે છે.'}
+            ? 'ये प्रश्नावलियाँ स्वास्थ्य विशेषज्ञ से बातचीत की तैयारी में आपके अनुभवों को व्यवस्थित करने में मदद करती हैं। अनुकूलित प्रश्नों के अंक नैदानिक कट-ऑफ नहीं हैं।'
+            : 'આ પ્રશ્નાવલીઓ આરોગ્ય નિષ્ણાત સાથે વાતચીત પહેલાં તમારા અનુભવો ગોઠવવામાં મદદ કરે છે. બદલાયેલા પ્રશ્નોના ગુણ તબીબી કટ-ઓફ નથી.'}
         </p>
       </div>
 
@@ -87,7 +87,7 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
                   {tool.id}
                 </span>
                 <span className="text-xs text-stone-500">
-                  {tool.questions.length} Standardized Questions
+                  {tool.questions.length} Questions
                 </span>
               </div>
 
@@ -100,7 +100,7 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
               </p>
 
               <div className="pt-2 border-t border-stone-100 text-xs text-stone-500">
-                <strong>Frequency Scale:</strong> 0 (Not at all) to 3 (Nearly every day)
+                <strong>Response options:</strong> {tool.frequencyOptions.length} choices
               </div>
             </div>
 

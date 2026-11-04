@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, ShieldAlert, RotateCcw, Phone } from 'lucide-react';
 import { Language } from '../types';
 import { screenersData, ScreenerTool } from '../data/assessments';
@@ -23,6 +23,18 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [showResults, setShowResults] = useState(false);
 
+  // Keep the modal synchronized with the card that opened it. This also
+  // clears a previous attempt when a different tool is launched.
+  useEffect(() => {
+    if (!isOpen) return;
+    const requestedTool = screenersData.some((tool) => tool.id === initialToolId)
+      ? initialToolId
+      : screenersData[0]?.id ?? '';
+    setSelectedToolId(requestedTool);
+    setAnswers({});
+    setShowResults(false);
+  }, [initialToolId, isOpen]);
+
   if (!isOpen) return null;
   const t = translations[currentLang];
   const activeTool: ScreenerTool = screenersData.find((t) => t.id === selectedToolId) || screenersData[0];
@@ -38,9 +50,25 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
 
   const answeredCount = activeTool.questions.filter((question) => typeof answers[question.id] === 'number').length;
   const totalQuestions = activeTool.questions.length;
-  const isComplete = answeredCount === totalQuestions;
-  const totalScore = activeTool.questions.reduce((sum, question) => sum + (answers[question.id] ?? 0), 0);
-  const maxScore = totalQuestions * Math.max(0, ...activeTool.frequencyOptions.map((option) => option.value));
+  const isComplete = totalQuestions > 0 && answeredCount === totalQuestions;
+  const scoreForQuestion = (questionId: number, questionIndex: number) => {
+    const rawValue = answers[questionId] ?? 0;
+    if (activeTool.positiveResponseThresholds) {
+      return rawValue >= (activeTool.positiveResponseThresholds[questionIndex] ?? Number.POSITIVE_INFINITY) ? 1 : 0;
+    }
+    if (activeTool.reverseScoredQuestionIds?.includes(questionId)) {
+      const maximumOption = Math.max(0, ...activeTool.frequencyOptions.map((option) => option.value));
+      return maximumOption - rawValue;
+    }
+    return rawValue;
+  };
+  const totalScore = activeTool.questions.reduce(
+    (sum, question, index) => sum + scoreForQuestion(question.id, index),
+    0
+  );
+  const maxScore = activeTool.positiveResponseThresholds
+    ? activeTool.positiveResponseThresholds.length
+    : totalQuestions * Math.max(0, ...activeTool.frequencyOptions.map((option) => option.value));
 
   // Trigger support guidance for any explicitly marked safety-sensitive question.
   const isCrisisTriggered = activeTool.questions.some(
@@ -53,7 +81,7 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
   ) || activeTool.interpretations[0];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 p-2 sm:p-4 overflow-y-auto overscroll-contain modal-scroll-backdrop" role="dialog" aria-modal="true" style={{ WebkitOverflowScrolling: 'touch' }}>
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 p-2 sm:p-4 overflow-y-auto overscroll-contain modal-scroll-backdrop" role="dialog" aria-modal="true" aria-labelledby="screener-dialog-title" style={{ WebkitOverflowScrolling: 'touch' }}>
       <div className="w-full max-w-3xl bg-white rounded-xl shadow-lg border border-stone-200 overflow-hidden my-2 sm:my-6 flex flex-col max-h-[96dvh] sm:max-h-[94dvh]">
         {/* Header */}
         <div className="bg-white border-b border-stone-200 p-3.5 sm:p-6 flex items-start justify-between gap-4 shrink-0">
@@ -61,7 +89,7 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
             <span className="text-xs font-semibold uppercase tracking-wider text-stone-500">
               {currentLang === 'en' ? 'Educational Self-Reflection' : currentLang === 'hi' ? 'शैक्षणिक आत्म-अवलोकन' : 'શૈક્ષણિક આત્મ-મૂલ્યાંકન'}
             </span>
-            <h2 className="text-xl sm:text-2xl font-semibold text-[#1c2430] tracking-tight mt-1">
+            <h2 id="screener-dialog-title" className="text-xl sm:text-2xl font-semibold text-[#1c2430] tracking-tight mt-1">
               {activeTool.name[currentLang]}
             </h2>
             <p className="text-xs text-stone-600 mt-1 max-w-xl leading-relaxed">
@@ -87,6 +115,8 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
                   setSelectedToolId(tool.id);
                   handleReset();
                 }}
+                aria-pressed={selectedToolId === tool.id}
+                aria-label={`Select ${tool.id}: ${tool.name[currentLang]}`}
                 className={`px-3 py-1.5 rounded-md text-xs font-semibold transition cursor-pointer min-h-[44px] flex items-center whitespace-nowrap ${
                   selectedToolId === tool.id
                     ? 'bg-[#115e59] text-white'
@@ -129,6 +159,7 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
                   return (
                     <div
                       key={q.id}
+                      data-testid="screener-question"
                       className={`p-4 rounded-lg border transition ${
                         q.isCrisisQuestion
                           ? 'border-[#fecaca] bg-[#fef2f2]'
@@ -151,7 +182,9 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
                           return (
                             <button
                               key={opt.value}
+                              data-testid="screener-answer"
                               onClick={() => handleAnswer(q.id, opt.value)}
+                              aria-pressed={isSelected}
                               className={`p-2.5 rounded-md text-xs font-medium border text-center transition cursor-pointer min-h-[44px] flex items-center justify-center ${
                                 isSelected
                                   ? 'bg-[#115e59] text-white border-[#115e59] font-semibold'
@@ -170,9 +203,21 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
 
               {/* Action Bar */}
               <div className="pt-3 border-t border-stone-200 flex items-center justify-between">
-                <span className="text-xs text-stone-500">
-                  {answeredCount} of {totalQuestions} answered
-                </span>
+                <div className="flex flex-col gap-1.5 min-w-0 flex-1 mr-3" aria-live="polite">
+                  <span className="text-xs text-stone-500">
+                    {answeredCount} of {totalQuestions} answered
+                  </span>
+                  <div
+                    className="h-1.5 rounded-full bg-stone-200 overflow-hidden"
+                    role="progressbar"
+                    aria-label="Questionnaire progress"
+                    aria-valuemin={0}
+                    aria-valuemax={totalQuestions}
+                    aria-valuenow={answeredCount}
+                  >
+                    <div className="h-full bg-[#0f766e] transition-all" style={{ width: `${totalQuestions ? (answeredCount / totalQuestions) * 100 : 0}%` }} />
+                  </div>
+                </div>
                 <button
                   disabled={!isComplete}
                   onClick={() => setShowResults(true)}
@@ -237,7 +282,7 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
               {/* Score Display Card */}
               <div className="p-6 bg-stone-50 border border-stone-200 rounded-lg text-center space-y-2">
                 <span className="text-xs font-semibold uppercase tracking-wider text-stone-500">
-                  Total Educational Score
+                  {activeTool.positiveResponseThresholds ? 'Positive Responses' : 'Educational Reflection Score'}
                 </span>
                 <div className="text-4xl font-semibold text-[#1c2430]">
                   {totalScore} <span className="text-lg text-stone-400 font-normal">/ {maxScore}</span>

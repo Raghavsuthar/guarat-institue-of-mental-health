@@ -16,6 +16,10 @@ export interface ScreenerTool {
     label: LocalizedString;
   }[];
   questions: ScreenerQuestion[];
+  /** Reverse raw yes/no scoring for specified zero-based questionnaire item values. */
+  reverseScoredQuestionIds?: number[];
+  /** ASRS Part A uses item-specific frequency thresholds and counts positive items. */
+  positiveResponseThresholds?: number[];
   interpretations: {
     minScore: number;
     maxScore: number;
@@ -332,11 +336,11 @@ export const screenersData: ScreenerTool[] = [
     ],
   },
   {
-    id: 'mdq',
+    id: 'mood-reflection',
     name: {
-      en: 'Mania / Hypomania Reflection (Mood Disorder Questionnaire - MDQ Concept)',
-      hi: 'मेनिया व हाइपोमेनिया आत्म-अवलोकन (MDQ शैक्षणिक चेकलिस्ट)',
-      gu: 'મેનિયા અને હાઈપોમેનિયા આત્મ-મૂલ્યાંકન (MDQ શૈક્ષણિક ટૂલ)',
+      en: 'Mood Pattern Reflection (adapted educational questions; not the MDQ)',
+      hi: 'मूड पैटर्न का आत्म-अवलोकन (अनुकूलित शैक्षणिक प्रश्न; MDQ नहीं)',
+      gu: 'મૂડ પેટર્નનું આત્મ-અવલોકન (બદલાયેલા શૈક્ષણિક પ્રશ્નો; MDQ નથી)',
     },
     purpose: {
       en: 'Educational reflection on whether you have experienced periods when you felt unusually high, irritable, hyper-energetic, or had racing thoughts distinctly different from your usual self.',
@@ -475,11 +479,11 @@ export const screenersData: ScreenerTool[] = [
     ],
   },
   {
-    id: 'audit-c',
+    id: 'alcohol-reflection',
     name: {
-      en: 'Alcohol Use Reflection (AUDIT-C Educational Tool)',
+      en: 'Alcohol Use Reflection (adapted educational questions; not the AUDIT-C)',
       hi: 'शराब सेवन आत्म-अवलोकन (AUDIT-C शैक्षणिक चेकलिस्ट)',
-      gu: 'દારૂના સેવનનું આત્મ-મૂલ્યાંકન (AUDIT-C શૈક્ષણિક ટૂલ)',
+      gu: 'દારૂના સેવનનું આત્મ-અવલોકન (બદલાયેલા શૈક્ષણિક પ્રશ્નો; AUDIT-C નથી)',
     },
     purpose: {
       en: 'Reflect confidentially on drinking patterns and identify whether alcohol consumption may be placing health or safety at elevated risk.',
@@ -574,8 +578,9 @@ export const screenersData: ScreenerTool[] = [
   },
   {
     id: 'asrs',
+    positiveResponseThresholds: [2, 2, 2, 3, 3, 3],
     name: {
-      en: 'Adult ADHD Reflection (ASRS-v1.1 Part A)',
+      en: 'Adult ADHD Reflection (ASRS-v1.1 Part A; item-threshold scoring)',
       hi: 'वयस्क एडीएचडी आत्म-अवलोकन (ASRS-v1.1 भाग-ए)',
       gu: 'પુખ્ત વયનું ADHD આત્મ-મૂલ્યાંકન (ASRS-v1.1)',
     },
@@ -649,47 +654,32 @@ export const screenersData: ScreenerTool[] = [
     interpretations: [
       {
         minScore: 0,
-        maxScore: 9,
-        level: { en: 'Low Likelihood of Adult ADHD', hi: 'एडीएचडी की कम संभावना', gu: 'પુખ્ત ADHD ની ઓછી શક્યતા' },
+        maxScore: 3,
+        level: { en: 'Below the ASRS Part A screening threshold', hi: 'ASRS भाग A की स्क्रीनिंग सीमा से कम', gu: 'ASRS ભાગ A ની સ્ક્રીનિંગ મર્યાદાથી ઓછું' },
         description: {
-          en: 'Your responses fall into the range typical of general population variations in attention and organizational focus.',
-          hi: 'आपके उत्तर सामान्य स्तर की ध्यान और एकाग्रता दर्शाते हैं।',
-          gu: 'તમારા જવાબો સામાન્ય સ્તરની એકાગ્રતા દર્શાવે છે.',
+          en: 'Fewer than four items meet the ASRS Part A frequency thresholds. This does not rule out ADHD; symptoms and impairment still deserve discussion if they concern you.',
+          hi: 'चार से कम प्रश्न ASRS भाग A की आवृत्ति सीमा तक पहुँचते हैं। इससे ADHD पूरी तरह खारिज नहीं होता; परेशानी बनी रहे तो चर्चा करें।',
+          gu: 'ચારથી ઓછા પ્રશ્નો ASRS ભાગ A ની આવર્તન મર્યાદા સુધી પહોંચે છે. તેથી ADHD સંપૂર્ણપણે નકારાતું નથી; તકલીફ હોય તો ચર્ચા કરો.',
         },
         recommendation: {
-          en: 'Standard time-management strategies, sleep optimization, and structured daily routines are generally adequate.',
-          hi: 'स्वस्थ दिनचर्या, अच्छी नींद और समय प्रबंधन के सामान्य नियमों का पालन करें।',
-          gu: 'સ્વસ્થ દિનચર્યા અને ટાઇમ મેનેજમેન્ટ પૂરતું છે.',
+          en: 'If attention, organization, or restlessness has been persistent since childhood and affects more than one area of life, discuss a full assessment with a qualified clinician.',
+          hi: 'यदि ध्यान, संगठन या बेचैनी की कठिनाइयाँ बचपन से हैं और जीवन के कई क्षेत्रों को प्रभावित करती हैं, तो विशेषज्ञ से विस्तृत मूल्यांकन पर चर्चा करें।',
+          gu: 'જો ધ્યાન, આયોજન કે બેચેનીની મુશ્કેલીઓ બાળપણથી છે અને જીવનના અનેક ક્ષેત્રોને અસર કરે છે, તો નિષ્ણાત સાથે વિગતવાર મૂલ્યાંકન અંગે ચર્ચા કરો.',
         },
       },
       {
-        minScore: 10,
-        maxScore: 13,
-        level: { en: 'Moderate / Subthreshold Attention Symptoms', hi: 'मध्यम स्तर के ध्यान लक्षण', gu: 'મધ્યમ સ્તરના લક્ષણો' },
+        minScore: 4,
+        maxScore: 6,
+        level: { en: 'ASRS Part A screening threshold reached', hi: 'ASRS भाग A की स्क्रीनिंग सीमा प्राप्त हुई', gu: 'ASRS ભાગ A ની સ્ક્રીનિંગ મર્યાદા પ્રાપ્ત થઈ' },
         description: {
-          en: 'You report noticeable friction with organization, focus, or restlessness that could stem from adult ADHD traits, chronic anxiety, burnout, or sleep disruption.',
-          hi: 'काम टालने या ध्यान भटकने के स्पष्ट लक्षण हैं। यह तनाव, चिंता या अव्यक्त एडीएचडी के लक्षण हो सकते हैं।',
-          gu: 'કામ ટાળવા કે એકાગ્રતા તૂટવાના સ્પષ્ટ લક્ષણો છે જે તણાવ કે ADHD ના હોઈ શકે.',
+          en: 'Four or more items meet the ASRS Part A frequency thresholds. This is a positive screen, not a diagnosis; other conditions can cause similar difficulties.',
+          hi: 'चार या अधिक प्रश्न ASRS भाग A की आवृत्ति सीमा तक पहुँचते हैं। यह सकारात्मक स्क्रीनिंग है, निदान नहीं; अन्य स्थितियों में भी ऐसी कठिनाइयाँ हो सकती हैं।',
+          gu: 'ચાર કે તેથી વધુ પ્રશ્નો ASRS ભાગ A ની આવર્તન મર્યાદા સુધી પહોંચે છે. આ સકારાત્મક સ્ક્રીનિંગ છે, નિદાન નહીં; અન્ય સ્થિતિઓમાં પણ આવી મુશ્કેલીઓ હોઈ શકે છે.',
         },
         recommendation: {
-          en: 'Consider keeping an executive function log and discussing these patterns with a mental health professional.',
-          hi: 'अपनी दिनचर्या की कमियों को नोट करें और आवश्यकतानुसार विशेषज्ञ से परामर्श लें।',
-          gu: 'તમારી મુશ્કેલીઓની નોંધ રાખો અને જરૂર પડ્યે નિષ્ણાતની સલાહ લો.',
-        },
-      },
-      {
-        minScore: 14,
-        maxScore: 24,
-        level: { en: 'High Likelihood of Significant Adult ADHD Traits', hi: 'वयस्क एडीएचडी की उच्च संभावना (परामर्श योग्य)', gu: 'પુખ્ત ADHD ના પ્રબળ લક્ષણો' },
-        description: {
-          en: 'Your symptom pattern is highly consistent with adult ADHD. Executive dysfunction, procrastination, and restlessness are likely creating significant distress in career or relationships.',
-          hi: 'यह स्कोर वयस्क एडीएचडी के बहुत अनुकूल है। काम पूरा न कर पाना, समय प्रबंधन की कमी और बेचैनी आपके जीवन को प्रभावित कर रही है।',
-          gu: 'આ સ્કોર પુખ્ત ADHD ના પ્રબળ લક્ષણો દર્શાવે છે, જે કારકિર્દી કે અંગત જીવનમાં અડચણરૂપ બની શકે છે.',
-        },
-        recommendation: {
-          en: 'A comprehensive psychiatric clinical evaluation is strongly recommended. Evidence-based behavioral strategies and modern pharmacotherapy offer excellent outcomes.',
-          hi: 'मनोचिकित्सक से मिलकर पूर्ण जांच कराएं। उचित थेरेपी और दवाओं से इसमें अत्यधिक सुधार संभव है।',
-          gu: 'મનોચિકિત્સક પાસે જઈને વિગતવાર તપાસ કરાવવી ખૂબ હિતાવહ છે. યોગ્ય સારવારથી જીવન બદલાઈ શકે છે.',
+          en: 'Arrange a comprehensive clinical assessment that reviews childhood onset, persistence, impairment in multiple settings, and alternative explanations such as sleep, anxiety, mood, or substance-related problems.',
+          hi: 'बचपन से शुरुआत, निरंतरता, अलग-अलग परिस्थितियों में प्रभाव और नींद, चिंता, मूड या पदार्थ-उपयोग जैसे अन्य कारणों की समीक्षा के लिए विस्तृत मूल्यांकन कराएँ।',
+          gu: 'બાળપણથી શરૂઆત, સતત રહેવું, વિવિધ પરિસ્થિતિઓમાં અસર અને ઊંઘ, ચિંતા, મૂડ કે પદાર્થ-સંબંધિત અન્ય કારણોની સમીક્ષા માટે વિગતવાર મૂલ્યાંકન કરાવો.',
         },
       },
     ],
@@ -841,6 +831,7 @@ export const screenersData: ScreenerTool[] = [
   },
   {
     id: 'dast10',
+    reverseScoredQuestionIds: [3],
     name: {
       en: 'Substance Use Reflection (DAST-10 Educational Screener)',
       hi: 'नशीली दवाओं के उपयोग का अवलोकन (DAST-10 शैक्षणिक टूल)',
@@ -1006,11 +997,11 @@ export const screenersData: ScreenerTool[] = [
     ],
   },
   {
-    id: 'pcl5',
+    id: 'ptsd-reflection',
     name: {
-      en: 'PTSD Reflection (PC-PTSD-5 Primary Care Screener)',
-      hi: 'पीटीएसडी आत्म-अवलोकन (PC-PTSD-5 शैक्षणिक टूल)',
-      gu: 'PTSD આત્મ-મૂલ્યાંકન (PC-PTSD-5 શૈક્ષણિક ટૂલ)',
+      en: 'PTSD Symptom Reflection (adapted 5-item educational tool; not PC-PTSD-5)',
+      hi: 'पीटीएसडी लक्षणों का आत्म-अवलोकन (अनुकूलित 5 प्रश्न; PC-PTSD-5 नहीं)',
+      gu: 'PTSD લક્ષણોનું આત્મ-અવલોકન (બદલાયેલા 5 પ્રશ્નો; PC-PTSD-5 નથી)',
     },
     purpose: {
       en: 'Educational reflection evaluating whether past severe traumatic events continue to cause intrusive memories, hyperarousal, or emotional numbness.',
@@ -1071,7 +1062,7 @@ export const screenersData: ScreenerTool[] = [
     interpretations: [
       {
         minScore: 0,
-        maxScore: 2,
+        maxScore: 3,
         level: { en: 'Unlikely PTSD Screen', hi: 'पीटीएसडी की कम संभावना', gu: 'PTSD ની ઓછી શક્યતા' },
         description: {
           en: 'Your responses do not indicate high acute levels of post-traumatic stress symptomatology.',
@@ -1085,7 +1076,7 @@ export const screenersData: ScreenerTool[] = [
         },
       },
       {
-        minScore: 3,
+        minScore: 4,
         maxScore: 5,
         level: { en: 'Positive PTSD Screen (Evaluation Recommended)', hi: 'पीटीएसडी के संभावित लक्षण (जांच योग्य)', gu: 'PTSD ના પ્રબળ લક્ષણો (તપાસ જરૂરી)' },
         description: {
@@ -1198,11 +1189,11 @@ export const screenersData: ScreenerTool[] = [
     ],
   },
   {
-    id: 'epds',
+    id: 'postpartum-reflection',
     name: {
-      en: 'Postpartum Mood Reflection (EPDS Educational Tool)',
-      hi: 'प्रसवोत्तर मनोदशा अवलोकन (EPDS शैक्षणिक टूल)',
-      gu: 'પ્રસૂતિ પછીના મૂડનું મૂલ્યાંકન (EPDS શૈક્ષણિક ટૂલ)',
+      en: 'Postpartum Mood Reflection (adapted educational questions; not the EPDS)',
+      hi: 'प्रसव के बाद मनोदशा का आत्म-अवलोकन (अनुकूलित शैक्षणिक प्रश्न; EPDS नहीं)',
+      gu: 'પ્રસૂતિ પછીના મૂડનું આત્મ-અવલોકન (બદલાયેલા શૈક્ષણિક પ્રશ્નો; EPDS નથી)',
     },
     purpose: {
       en: 'Educational reflection for mothers within the first year after childbirth on mood, anxiety, and bonding difficulties.',
