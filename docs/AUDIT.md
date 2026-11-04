@@ -268,3 +268,17 @@ This is a source-level change, not proof of visual acceptance. Screenshots at 36
 - The new test was observed failing on the original content for ten pattern groups and passed after correction. On PR head `714c196`, CI passed content validation, TypeScript/lint, API safety tests, and production build (run `41775294157`); browser smoke, responsive, and axe checks also passed (run `41775294207`).
 - Current sources opened for the targeted corrections include WHO depression/mhGAP, NICE bipolar/eating disorders/ADHD/autism/social anxiety/OCD-BDD guidance, ACOG perinatal guidelines, and NHS phobia guidance.
 - This is not a full clinical review, independent psychiatrist sign-off, fluent translation review, external-link crawl, or live deployment verification.
+
+
+## 2026-11-04 — Website runtime and deployment audit
+
+- See `docs/WEBSITE_RUNTIME_AUDIT_2026-11.md` for the complete scope, evidence, fixes, and release gates.
+- Eleven issues were identified across the production build, Gemini configuration, crisis phrase coverage, environment loading, screener copy/tests, README accuracy, generated-answer labeling, and search keyboard/dialog accessibility. See `docs/WEBSITE_RUNTIME_AUDIT_2026-11.md` for evidence and corrections.
+- Fixes are isolated in `fix/website-runtime-bugs-2026-11` / PR #8. CI on the pre-cleanup head passed build and unit checks; final-head workflows are pending verification.
+- No live deployment or provider credentials were accessed. Gemini/Upstash production integration, Docker startup, full route matrix, and PWA/offline behavior remain unverified.
+
+
+- Runtime audit follow-up: crisis detection now includes common high-signal English expressions; the local `.env` bootstrap was corrected for Vite and Express; CI now starts the built Express server and checks `/api/health`. See `docs/WEBSITE_RUNTIME_AUDIT_2026-11.md` and PR #8.
+
+
+- Runtime audit status: the branch now also fixes search-dialog accessibility/Escape handling, local `.env` loading, and deduplicates the expanded crisis phrase list. Latest-head CI and all 13 browser/accessibility tests passed; Vercel preview remains rate-limited. See `docs/WEBSITE_RUNTIME_AUDIT_2026-11.md`.

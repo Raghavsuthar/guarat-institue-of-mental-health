@@ -8,6 +8,14 @@ test('crisis detection catches English self-harm phrases before model use', () =
   assert.equal(isCrisisQuery('I am thinking about suicide'), true);
 });
 
+test('crisis detection catches common English self-harm expressions', () => {
+  assert.equal(isCrisisQuery('I am suicidal'), true);
+  assert.equal(isCrisisQuery('I have suicidal thoughts'), true);
+  assert.equal(isCrisisQuery('I want to hurt myself'), true);
+  assert.equal(isCrisisQuery('I took too many pills'), true);
+  assert.equal(isCrisisQuery('I am not safe with myself'), true);
+});
+
 test('crisis detection catches Hindi, Gujarati, and common transliterations', () => {
   assert.equal(isCrisisQuery('मुझे आत्महत्या के विचार आ रहे हैं'), true);
   assert.equal(isCrisisQuery('મને આત્મહત્યા વિશે વિચારો આવે છે'), true);

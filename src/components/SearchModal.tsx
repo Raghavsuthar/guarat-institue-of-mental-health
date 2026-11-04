@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Search, X, BookOpen, AlertCircle, Activity, HelpCircle, HeartPulse, ArrowRight } from 'lucide-react';
 import { Language, Condition, SubstanceInfo, TherapyModality, MythFact, SymptomEducation, ChildAdolescentTopic, WomensMentalHealthTopic } from '../types';
 import { conditionsData } from '../data/conditions';
@@ -39,6 +39,15 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 }) => {
   const [query, setQuery] = useState('');
   const t = translations[currentLang];
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -160,7 +169,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 p-2 sm:p-4 pt-2 sm:pt-6 md:pt-12 overflow-y-auto overscroll-contain modal-scroll-backdrop" role="dialog" aria-modal="true" style={{ WebkitOverflowScrolling: 'touch' }}>
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 p-2 sm:p-4 pt-2 sm:pt-6 md:pt-12 overflow-y-auto overscroll-contain modal-scroll-backdrop" role="dialog" aria-modal="true" aria-label={t.search.title} style={{ WebkitOverflowScrolling: 'touch' }}>
       <div className="w-full max-w-2xl bg-white rounded-xl shadow-lg border border-stone-200 overflow-hidden my-2 sm:my-4 flex flex-col max-h-[96dvh] sm:max-h-[94dvh]">
         {/* Search Header */}
         <div className="p-3 sm:p-4 border-b border-stone-200 flex items-center gap-2 sm:gap-3 shrink-0">

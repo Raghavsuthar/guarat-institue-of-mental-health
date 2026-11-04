@@ -1,4 +1,6 @@
+import 'dotenv/config';
 import express from 'express';
+import { GEMINI_MODEL, QA_SYSTEM_INSTRUCTION } from './api/qa';
 import path from 'path';
 import { apiErrorMessage, apiErrorStatus, enforceRateLimit, getAnalyticsSummary, hasValidAdminToken, isCrisisQuery, recordAnalyticsPing } from './server/shared/analytics';
 
@@ -127,25 +129,13 @@ app.post('/api/qa', async (req, res) => {
     }
 
     const { GoogleGenAI } = await import('@google/genai');
-    const ai = new GoogleGenAI({});
-
-    const systemInstruction = `You are an educational assistant for Mindcare, a public mental-health education portal. Do not make claims about the author's credentials or provide individualized clinical care.
-
-MANDATORY SAFETY AND ETHICAL BOUNDARIES:
-1. STRICTLY EDUCATE, NEVER DIAGNOSE. Do not say "You might have depression" or "Based on what you said, you have ADHD". Say "In clinical psychiatry, these symptoms are often evaluated under..."
-2. NEVER prescribe or recommend medication names, specific dosages, or medical regimens.
-3. NEVER role-play as the user's personal doctor or therapist.
-4. Keep answers compassionate, objective, destigmatizing, and concise (2-3 short paragraphs max).
-5. Ground your answers in biopsychosocial psychiatry, clinical psychotherapy concepts (CBT, ERP, DBT), lifestyle pillars (sleep hygiene, circadian rhythm, exercise), and standard public mental health guidelines.
-6. Emphasize that psychiatric conditions are treatable medical conditions involving neurocircuitry, genetic vulnerabilities, and environmental stress.
-7. Language requirement: If user asks in Hindi, answer in clean, accessible Hindi (Devanagari). If user asks in Gujarati, answer in Gujarati. If in English, answer in English.
-8. Always conclude with a calm reminder: "This information is for education only. Please consult a registered psychiatrist or MBBS doctor for an individualized clinical assessment."`;
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
     const response = await ai.models.generateContent({
-      model: 'gemini-3.8-flash',
+      model: GEMINI_MODEL,
       contents: [{ role: 'user', parts: [{ text: query }] }],
       config: {
-        systemInstruction,
+        systemInstruction: QA_SYSTEM_INSTRUCTION,
       },
     });
 

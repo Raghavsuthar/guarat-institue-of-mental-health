@@ -107,8 +107,27 @@ test('self-reflection cards and scale answers respond to real mobile taps', asyn
     const firstAnswer = dialog.getByTestId('screener-answer').first();
     await firstAnswer.tap();
     await expect(firstAnswer).toHaveAttribute('aria-pressed', 'true');
-    await expect(dialog.getByText(/1 of \\d+ answered/i)).toBeVisible();
+    await expect(dialog.getByText(/1 of \d+ answered/i)).toBeVisible();
   } finally {
     await context.close();
   }
+});
+
+test('self-reflection notice respects the different recall periods of each tool', async ({ page }) => {
+  for (const language of ['en', 'hi', 'gu']) {
+    await page.goto(`/${language}/interactive`);
+    await expect(page.getByText(/Each questionnaire uses its own (?:stated )?recall period|हर प्रश्नावली में उसकी अपनी बताई गई समय-अवधि|દરેક પ્રશ્નાવલીમાં તેમાં જણાવેલો પોતાનો સમયગાળો/i)).toBeVisible();
+    await expect(page.getByText(/Scores reflect subjective emotional distress over the past 2 weeks/i)).toHaveCount(0);
+  }
+});
+
+test('search keyboard shortcut matches its visible hint and opens search', async ({ page }) => {
+  await page.goto('/en');
+  await expect(page.locator('header kbd')).toHaveText('Ctrl/⌘ K');
+  await expect(page.getByRole('button', { name: /Search topics Ctrl\/⌘ K/i })).toBeVisible();
+  await page.keyboard.press('Control+k');
+  const searchDialog = page.getByRole('dialog', { name: /global search/i });
+  await expect(searchDialog).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(searchDialog).toHaveCount(0);
 });

@@ -234,7 +234,7 @@ export const EducationalQAAssistant: React.FC<EducationalQAAssistantProps> = ({
                 <h3 id="qa-assistant-title" className="text-xs sm:text-sm font-bold leading-tight">
                   {t.panelTitle}
                 </h3>
-                <span className="text-[10px] text-teal-200 font-medium">Verified Psychiatric Education</span>
+                <span className="text-[10px] text-teal-200 font-medium">General educational information</span>
               </div>
             </div>
 
