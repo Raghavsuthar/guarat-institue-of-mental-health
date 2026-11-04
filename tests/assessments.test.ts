@@ -48,14 +48,14 @@ test('recognized screeners and adapted reflections are explicitly distinguished'
   assert.equal(getAssessmentCategory('asrs'), 'recognized');
   assert.equal(getAssessmentCategory('dast10'), 'recognized');
   assert.equal(getAssessmentCategory('scoff'), 'recognized');
-  for (const id of ['mood', 'alcohol', 'ptsd-reflection', 'postpartum-reflection']) {
+  for (const id of ['mood-reflection', 'alcohol-reflection', 'ptsd-reflection', 'postpartum-reflection']) {
     assert.equal(getAssessmentCategory(id), 'adapted');
   }
   assert.equal(getAssessmentCategory('isi'), 'pending-review');
 });
 
 test('adapted and pending-review tools never show a clinical score or severity band', () => {
-  for (const id of ['mood', 'alcohol', 'ptsd-reflection', 'postpartum-reflection', 'isi']) {
+  for (const id of ['mood-reflection', 'alcohol-reflection', 'ptsd-reflection', 'postpartum-reflection', 'isi']) {
     assert.deepEqual(getResultPresentation(id), { showScore: false, showInterpretation: false });
   }
   assert.deepEqual(getResultPresentation('phq9'), { showScore: true, showInterpretation: true });
