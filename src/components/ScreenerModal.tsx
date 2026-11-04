@@ -51,8 +51,24 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
   const answeredCount = activeTool.questions.filter((question) => typeof answers[question.id] === 'number').length;
   const totalQuestions = activeTool.questions.length;
   const isComplete = totalQuestions > 0 && answeredCount === totalQuestions;
-  const totalScore = activeTool.questions.reduce((sum, question) => sum + (answers[question.id] ?? 0), 0);
-  const maxScore = totalQuestions * Math.max(0, ...activeTool.frequencyOptions.map((option) => option.value));
+  const scoreForQuestion = (questionId: number, questionIndex: number) => {
+    const rawValue = answers[questionId] ?? 0;
+    if (activeTool.positiveResponseThresholds) {
+      return rawValue >= (activeTool.positiveResponseThresholds[questionIndex] ?? Number.POSITIVE_INFINITY) ? 1 : 0;
+    }
+    if (activeTool.reverseScoredQuestionIds?.includes(questionId)) {
+      const maximumOption = Math.max(0, ...activeTool.frequencyOptions.map((option) => option.value));
+      return maximumOption - rawValue;
+    }
+    return rawValue;
+  };
+  const totalScore = activeTool.questions.reduce(
+    (sum, question, index) => sum + scoreForQuestion(question.id, index),
+    0
+  );
+  const maxScore = activeTool.positiveResponseThresholds
+    ? activeTool.positiveResponseThresholds.length
+    : totalQuestions * Math.max(0, ...activeTool.frequencyOptions.map((option) => option.value));
 
   // Trigger support guidance for any explicitly marked safety-sensitive question.
   const isCrisisTriggered = activeTool.questions.some(
@@ -264,7 +280,7 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
               {/* Score Display Card */}
               <div className="p-6 bg-stone-50 border border-stone-200 rounded-lg text-center space-y-2">
                 <span className="text-xs font-semibold uppercase tracking-wider text-stone-500">
-                  Total Educational Score
+                  {activeTool.positiveResponseThresholds ? 'Positive Responses' : 'Educational Reflection Score'}
                 </span>
                 <div className="text-4xl font-semibold text-[#1c2430]">
                   {totalScore} <span className="text-lg text-stone-400 font-normal">/ {maxScore}</span>
