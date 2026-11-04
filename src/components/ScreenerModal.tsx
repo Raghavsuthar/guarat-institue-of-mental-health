@@ -213,6 +213,26 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
                 })}
               </div>
 
+              {isCrisisTriggered && (
+                <div role="alert" className="p-4 rounded-lg border border-red-300 bg-red-50 space-y-2">
+                  <p className="text-sm font-semibold text-red-900">
+                    {currentLang === 'en' ? 'Please seek support now' : currentLang === 'hi' ? 'कृपया अभी सहायता लें' : 'કૃપા કરીને અત્યારે મદદ લો'}
+                  </p>
+                  <p className="text-xs text-stone-800">
+                    {currentLang === 'en'
+                      ? 'You selected an answer about thoughts of self-harm. You do not need to wait for the questionnaire result. If you may act on these thoughts or cannot stay safe, call 112 or go to the nearest emergency department. Tele-MANAS is available at 14416.'
+                      : currentLang === 'hi'
+                      ? 'आपने खुद को नुकसान पहुंचाने वाले विचारों से जुड़ा उत्तर चुना है। प्रश्नावली पूरी होने की प्रतीक्षा न करें। यदि आप स्वयं को सुरक्षित नहीं रख पा रहे हैं, तो 112 पर कॉल करें या निकटतम आपातकालीन विभाग जाएं। टेली-मानस 14416 पर उपलब्ध है।'
+                      : 'તમે પોતાને નુકસાન પહોંચાડવાના વિચારો અંગેનો જવાબ પસંદ કર્યો છે. પ્રશ્નાવલી પૂરી થાય તેની રાહ ન જુઓ. જો તમે સુરક્ષિત ન રહી શકો તેમ લાગે તો 112 પર કૉલ કરો અથવા નજીકના ઇમરજન્સી વિભાગમાં જાઓ. ટેલી-માનસ 14416 પર ઉપલબ્ધ છે.'}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <a href="tel:112" className="px-3 py-2 rounded bg-red-800 text-white text-xs font-semibold min-h-[40px]">Call 112</a>
+                    <a href="tel:14416" className="px-3 py-2 rounded bg-red-800 text-white text-xs font-semibold min-h-[40px]">Call 14416</a>
+                    <button onClick={onOpenCrisis} className="px-3 py-2 rounded bg-stone-800 text-white text-xs font-semibold min-h-[40px]">Emergency guide</button>
+                  </div>
+                </div>
+              )}
+
               {/* Action Bar */}
               <div className="pt-3 border-t border-stone-200 flex items-center justify-between">
                 <div className="flex flex-col gap-1.5 min-w-0 flex-1 mr-3" aria-live="polite">
