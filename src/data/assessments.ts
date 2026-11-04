@@ -16,6 +16,10 @@ export interface ScreenerTool {
     label: LocalizedString;
   }[];
   questions: ScreenerQuestion[];
+  /** Reverse raw yes/no scoring for specified zero-based questionnaire item values. */
+  reverseScoredQuestionIds?: number[];
+  /** ASRS Part A uses item-specific frequency thresholds and counts positive items. */
+  positiveResponseThresholds?: number[];
   interpretations: {
     minScore: number;
     maxScore: number;
@@ -332,7 +336,7 @@ export const screenersData: ScreenerTool[] = [
     ],
   },
   {
-    id: 'mdq',
+    id: 'mood-reflection',
     name: {
       en: 'Mood Pattern Reflection (adapted educational questions; not the MDQ)',
       hi: 'मूड पैटर्न का आत्म-अवलोकन (अनुकूलित शैक्षणिक प्रश्न; MDQ नहीं)',
@@ -475,11 +479,11 @@ export const screenersData: ScreenerTool[] = [
     ],
   },
   {
-    id: 'audit-c',
+    id: 'alcohol-reflection',
     name: {
-      en: 'Alcohol Use Reflection (AUDIT-C Educational Tool)',
+      en: 'Alcohol Use Reflection (adapted educational questions; not the AUDIT-C)',
       hi: 'शराब सेवन आत्म-अवलोकन (AUDIT-C शैक्षणिक चेकलिस्ट)',
-      gu: 'દારૂના સેવનનું આત્મ-મૂલ્યાંકન (AUDIT-C શૈક્ષણિક ટૂલ)',
+      gu: 'દારૂના સેવનનું આત્મ-અવલોકન (બદલાયેલા શૈક્ષણિક પ્રશ્નો; AUDIT-C નથી)',
     },
     purpose: {
       en: 'Reflect confidentially on drinking patterns and identify whether alcohol consumption may be placing health or safety at elevated risk.',
@@ -574,8 +578,9 @@ export const screenersData: ScreenerTool[] = [
   },
   {
     id: 'asrs',
+    positiveResponseThresholds: [2, 2, 2, 3, 3, 3],
     name: {
-      en: 'Adult ADHD Reflection (ASRS-v1.1 Part A)',
+      en: 'Adult ADHD Reflection (ASRS-v1.1 Part A; item-threshold scoring)',
       hi: 'वयस्क एडीएचडी आत्म-अवलोकन (ASRS-v1.1 भाग-ए)',
       gu: 'પુખ્ત વયનું ADHD આત્મ-મૂલ્યાંકન (ASRS-v1.1)',
     },
@@ -649,7 +654,7 @@ export const screenersData: ScreenerTool[] = [
     interpretations: [
       {
         minScore: 0,
-        maxScore: 9,
+        maxScore: 3,
         level: { en: 'Low Likelihood of Adult ADHD', hi: 'एडीएचडी की कम संभावना', gu: 'પુખ્ત ADHD ની ઓછી શક્યતા' },
         description: {
           en: 'Your responses fall into the range typical of general population variations in attention and organizational focus.',
@@ -663,8 +668,8 @@ export const screenersData: ScreenerTool[] = [
         },
       },
       {
-        minScore: 10,
-        maxScore: 13,
+        minScore: 4,
+        maxScore: 4,
         level: { en: 'Moderate / Subthreshold Attention Symptoms', hi: 'मध्यम स्तर के ध्यान लक्षण', gu: 'મધ્યમ સ્તરના લક્ષણો' },
         description: {
           en: 'You report noticeable friction with organization, focus, or restlessness that could stem from adult ADHD traits, chronic anxiety, burnout, or sleep disruption.',
@@ -678,8 +683,8 @@ export const screenersData: ScreenerTool[] = [
         },
       },
       {
-        minScore: 14,
-        maxScore: 24,
+        minScore: 5,
+        maxScore: 6,
         level: { en: 'High Likelihood of Significant Adult ADHD Traits', hi: 'वयस्क एडीएचडी की उच्च संभावना (परामर्श योग्य)', gu: 'પુખ્ત ADHD ના પ્રબળ લક્ષણો' },
         description: {
           en: 'Your symptom pattern is highly consistent with adult ADHD. Executive dysfunction, procrastination, and restlessness are likely creating significant distress in career or relationships.',
@@ -841,6 +846,7 @@ export const screenersData: ScreenerTool[] = [
   },
   {
     id: 'dast10',
+    reverseScoredQuestionIds: [3],
     name: {
       en: 'Substance Use Reflection (DAST-10 Educational Screener)',
       hi: 'नशीली दवाओं के उपयोग का अवलोकन (DAST-10 शैक्षणिक टूल)',
@@ -1006,11 +1012,11 @@ export const screenersData: ScreenerTool[] = [
     ],
   },
   {
-    id: 'pc-ptsd-5',
+    id: 'ptsd-reflection',
     name: {
-      en: 'PTSD Reflection (PC-PTSD-5, 5-item primary-care screener)',
-      hi: 'पीटीएसडी आत्म-अवलोकन (PC-PTSD-5, 5 प्रश्नों वाला स्क्रीनर)',
-      gu: 'PTSD આત્મ-અવલોકન (PC-PTSD-5, 5 પ્રશ્નોનું સ્ક્રીનર)',
+      en: 'PTSD Symptom Reflection (adapted 5-item educational tool; not PC-PTSD-5)',
+      hi: 'पीटीएसडी लक्षणों का आत्म-अवलोकन (अनुकूलित 5 प्रश्न; PC-PTSD-5 नहीं)',
+      gu: 'PTSD લક્ષણોનું આત્મ-અવલોકન (બદલાયેલા 5 પ્રશ્નો; PC-PTSD-5 નથી)',
     },
     purpose: {
       en: 'Educational reflection evaluating whether past severe traumatic events continue to cause intrusive memories, hyperarousal, or emotional numbness.',
@@ -1198,7 +1204,7 @@ export const screenersData: ScreenerTool[] = [
     ],
   },
   {
-    id: 'epds',
+    id: 'postpartum-reflection',
     name: {
       en: 'Postpartum Mood Reflection (adapted educational questions; not the EPDS)',
       hi: 'प्रसव के बाद मनोदशा का आत्म-अवलोकन (अनुकूलित शैक्षणिक प्रश्न; EPDS नहीं)',
