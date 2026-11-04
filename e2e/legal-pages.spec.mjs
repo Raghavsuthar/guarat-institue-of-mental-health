@@ -41,6 +41,7 @@ test('privacy page has no serious or critical axe violations', async ({ page }) 
       impact,
       description,
       targets: nodes.map(({ target }) => target),
+      nodes: nodes.map(({ html, failureSummary }) => ({ html, failureSummary })),
     })),
     'High-impact axe findings must be fixed before merge'
   ).toEqual([]);
