@@ -20,7 +20,7 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
 
   useEffect(() => {
     updatePageSEO({
-      title: currentLang === 'en' ? 'Educational Mental Health Screeners (PHQ-9 & GAD-7)' : currentLang === 'hi' ? 'मानसिक स्वास्थ्य आत्म-अवलोकन टूल (PHQ-9 व GAD-7)' : 'આત્મ-મૂલ્યાંકન પ્રશ્નાવલિ (PHQ-9 અને GAD-7)',
+      title: currentLang === 'en' ? 'Mental Health Self-Reflection Tools' : currentLang === 'hi' ? 'मानसिक स्वास्थ्य आत्म-अवलोकन टूल' : 'માનસિક સ્વ-અવલોકન સાધનો',
       description: currentLang === 'en'
         ? 'Validated depression and anxiety questionnaires (PHQ-9 and GAD-7) for self-reflection and preparing for a doctor consultation.'
         : currentLang === 'hi'
@@ -36,7 +36,7 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
       {/* Header */}
       <div className="space-y-2">
         <span className="text-xs font-semibold uppercase tracking-wider text-stone-500">
-          {currentLang === 'en' ? 'Validated Reflection Instruments' : currentLang === 'hi' ? 'प्रमाणित आत्म-मूल्यांकन' : 'સ્વ-મૂલ્યાંકન સાધનો'}
+          {currentLang === 'en' ? 'Self-Reflection Tools' : currentLang === 'hi' ? 'आत्म-अवलोकन टूल' : 'આત્મ-અવલોકન સાધનો'}
         </span>
         <h1 className="text-2xl sm:text-3xl font-semibold text-[#1c2430] tracking-tight">
           {t.nav.interactive}
@@ -87,7 +87,7 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
                   {tool.id}
                 </span>
                 <span className="text-xs text-stone-500">
-                  {tool.questions.length} Standardized Questions
+                  {tool.questions.length} Questions
                 </span>
               </div>
 
@@ -100,7 +100,7 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
               </p>
 
               <div className="pt-2 border-t border-stone-100 text-xs text-stone-500">
-                <strong>Frequency Scale:</strong> 0 (Not at all) to 3 (Nearly every day)
+                <strong>Response options:</strong> {tool.frequencyOptions.length} choices
               </div>
             </div>
 
