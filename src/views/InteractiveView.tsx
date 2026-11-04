@@ -102,7 +102,7 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
 
               <p className="text-xs font-medium text-stone-500">
                 {getAssessmentCategory(tool.id) === 'recognized'
-                  ? (currentLang === 'en' ? 'Recognized screening instrument · non-diagnostic' : currentLang === 'hi' ? 'मान्यता प्राप्त स्क्रीनिंग टूल · निदान नहीं' : 'ઓળખાયેલ સ્ક્રીનિંગ સાધન · નિદાન નથી')
+                  ? (currentLang === 'en' ? 'Established instrument reference · app version not validated' : currentLang === 'hi' ? 'स्थापित टूल का संदर्भ · ऐप संस्करण मान्य नहीं' : 'સ્થાપિત સાધનનો સંદર્ભ · એપ્લિકેશનનું સંસ્કરણ માન્ય નથી')
                   : getAssessmentCategory(tool.id) === 'pending-review'
                   ? (currentLang === 'en' ? 'Educational reflection · pending item and permission review' : currentLang === 'hi' ? 'शैक्षणिक आत्म-अवलोकन · प्रश्न और अनुमति की समीक्षा बाकी' : 'શૈક્ષણિક આત્મ-અવલોકન · પ્રશ્નો અને પરવાનગીની સમીક્ષા બાકી')
                   : (currentLang === 'en' ? 'Adapted educational reflection · no validated clinical cut-off' : currentLang === 'hi' ? 'अनुकूलित शैक्षणिक आत्म-अवलोकन · मान्य नैदानिक कट-ऑफ नहीं' : 'બદલાયેલ શૈક્ષણિક આત્મ-અવલોકન · માન્ય તબીબી કટ-ઓફ નથી')}
