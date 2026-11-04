@@ -3,14 +3,14 @@ import { test, expect } from '@playwright/test';
 const tools = [
   { id: 'phq9', heading: /PHQ-9/i },
   { id: 'gad7', heading: /GAD-7/i },
-  { id: 'mdq', heading: /Mood Pattern Reflection/i },
-  { id: 'audit-c', heading: /AUDIT-C/i },
+  { id: 'mood-reflection', heading: /Mood Pattern Reflection/i },
+  { id: 'alcohol-reflection', heading: /Alcohol Use Reflection/i },
   { id: 'asrs', heading: /ASRS/i },
   { id: 'isi', heading: /Insomnia Severity Index/i },
   { id: 'dast10', heading: /DAST-10/i },
-  { id: 'pc-ptsd-5', heading: /PC-PTSD-5/i },
+  { id: 'ptsd-reflection', heading: /PTSD Symptom Reflection/i },
   { id: 'scoff', heading: /SCOFF/i },
-  { id: 'epds', heading: /Postpartum Mood Reflection/i },
+  { id: 'postpartum-reflection', heading: /Postpartum Mood Reflection/i },
 ];
 
 test('every self-reflection tool opens, accepts answers, shows results and can be closed', async ({ page }) => {
