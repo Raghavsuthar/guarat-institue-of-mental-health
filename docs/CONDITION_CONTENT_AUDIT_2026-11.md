@@ -10,8 +10,8 @@
 - **23/23** published condition IDs have a matching evidence-guide key in the repository snapshot.
 - The existing automated content validator checks selected localized fields for non-empty English, Hindi, and Gujarati strings. It does not verify semantic translation equivalence, claim-to-source support, current guideline status, or clinical correctness.
 - The evidence-guide test checks guide coverage, populated translations, and basic HTTPS/source metadata. It does not prove that each cited source supports every claim.
-- Targeted copy corrections in this phase cover **14 condition records**: depression, bipolar disorder, schizophrenia, anorexia nervosa, bulimia nervosa, binge-eating disorder, ADHD, autism, social anxiety disorder, specific phobia, illness anxiety disorder, PMDD, personality-disorder overview, and perinatal/postpartum depression and anxiety.
-- The remaining nine records are inventoried below and remain due for claim-by-claim source review.
+- Targeted copy corrections in this phase cover **17 condition records**: depression, bipolar disorder, schizophrenia, anorexia nervosa, bulimia nervosa, binge-eating disorder, ADHD, autism, social anxiety disorder, specific phobia, illness anxiety disorder, PMDD, personality-disorder overview, and perinatal/postpartum depression and anxiety.
+- Six records received no targeted copy edits in this phase; all 23 still require claim-by-claim source review.
 - This is an editorial and source-inspection audit, **not** independent clinical sign-off or fluent clinical-language review. No reviewer credential or clinical approval is claimed.
 
 ## Full condition inventory
@@ -20,8 +20,8 @@
 |---|---:|---|---|
 | `depression` | Present | P0 | Replaced simplified neurotransmitter/biological-cause wording and fixed heritability percentage with a multifactorial explanation. |
 | `bipolar` | Present | P0 | Removed deterministic genetic percentages and overconfident single-mechanism wording; clarified that family/genetic contribution is not destiny. |
-| `anxiety-gad` | Present | P1 | Genetic heritability estimate and highly specific neurocircuit explanations need source/uncertainty review. |
-| `panic-disorder` | Present | P1 | Heritability percentage and “false suffocation alarm” mechanism need careful qualification and source matching. |
+| `anxiety-gad` | Present | P1 | Removed fixed 70–80% treatment-outcome claim. Genetic heritability estimate and highly specific neurocircuit explanations still need source/uncertainty review. |
+| `panic-disorder` | Present | P1 | Removed fixed 75–85% remission claim. Heritability percentage and “false suffocation alarm” mechanism still need careful qualification and source matching. |
 | `ocd` | Present | P1 | Review neurocircuit/neurochemical statements and ensure ERP recommendations reflect the cited guideline's scope and population. |
 | `schizophrenia` | Present | P0 | Corrected FAQ wording that described antipsychotics as simply balancing neurotransmitters and said abrupt discontinuation almost inevitably causes relapse. |
 | `ptsd` | Present | P1 | Review gene-polymorphism claims and broad statements about SSRI efficacy across all symptom clusters; verify treatment wording against trauma-focused guidance. |
@@ -33,7 +33,7 @@
 | `autism-spectrum-disorder` | Present | P1 | Removed fixed heritability percentages and unsupported >90% diagnostic-tool accuracy claim; clarified that ADOS-2/ADI-R support but do not independently establish diagnosis. |
 | `social-anxiety-disorder` | Present | P1 | Removed precise heritability and CBT-response percentages; retained CBT as an evidence-based option without promising a fixed outcome. |
 | `specific-phobia` | Present | P1 | Removed near-90% cure claim and “panacea” wording; described graded exposure as a helpful option with variable response. |
-| `insomnia-disorder` | Present | P1 | Review all medication, alcohol, and sleep-hygiene claims; avoid implying sleep-hygiene advice alone treats chronic insomnia. |
+| `insomnia-disorder` | Present | P1 | Removed fixed 70–80% remission claim for stimulus-control/sleep-restriction techniques. Review all medication, alcohol, and sleep-hygiene claims; avoid implying sleep-hygiene advice alone treats chronic insomnia. |
 | `somatic-symptom-disorder` | Present | P1 | Review highly specific neuroimaging/pain-processing claims; retain respectful wording that symptoms are real and do not exclude coexisting medical illness. |
 | `illness-anxiety-disorder` | Present | P1 | Removed unsupported 70–80% recovery claim; clarified that appropriate physical symptoms still require medical assessment. |
 | `persistent-depressive-disorder` | Present | P1 | Review monoamine/neuroplasticity explanations and ensure chronicity, bipolar differential, and functioning are accurately represented. |
@@ -71,7 +71,7 @@
 - Verify source links, source dates, and scope for each evidence-guide finding; a source URL being present does not establish claim support.
 - Arrange fluent clinical-language review of Hindi and Gujarati, especially emergency and medication-safety instructions.
 - Obtain independent psychiatrist review before displaying any “clinically reviewed” status.
-- Revisit the nine records marked pending and the remaining detailed copy in the 14 corrected records; targeted corrections do not constitute full clinical approval.
+- Revisit the six records without targeted copy edits and the remaining detailed copy in the 17 corrected records; targeted corrections do not constitute full clinical approval.
 - Verify patient-facing resource listings separately against official government/service sources.
 
 ## Release status
