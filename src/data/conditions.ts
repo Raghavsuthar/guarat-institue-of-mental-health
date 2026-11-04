@@ -1012,9 +1012,9 @@ const baseConditionsData: Condition[] = [
     evidenceHighlights: [
       {
         fact: {
-          en: 'Clinical trials and Cochrane meta-analyses establish that combining CBT with first-line SSRIs yields remission or marked clinical symptom reduction in 75% to 85% of individuals with panic disorder.',
-          hi: 'क्लिनिकल अध्ययनों और कोचरन समीक्षाओं के अनुसार सीबीटी (CBT) और आधुनिक SSRI दवाओं का संयोजन 75% से 85% पैनिक डिसऑर्डर के मरीजों को दौरों से पूर्ण राहत दिलाता है।',
-          gu: 'ક્લિનિકલ સંશોધનો અને કોકરેન વિશ્લેષણ દર્શાવે છે કે CBT કાઉન્સેલિંગ અને આધુનિક SSRI દવાઓનું સંયોજન ૭૫% થી ૮૫% પેનિક ડિસઓર્ડરના દર્દીઓને હુમલાઓમાંથી સંપૂર્ણ મુક્તિ અપાવે છે.',
+          en: 'Evidence supports CBT and SSRI medication as treatment options for panic disorder. Combined treatment may be considered according to symptom severity, previous response, and patient preference; individual outcomes vary.',
+          hi: 'पैनिक डिसऑर्डर के उपचार विकल्पों में CBT और SSRI दवाएँ शामिल हैं। लक्षणों की गंभीरता, पहले के उपचार और व्यक्ति की पसंद के अनुसार संयुक्त उपचार पर विचार किया जा सकता है; परिणाम अलग-अलग होते हैं।',
+          gu: 'પેનિક ડિસઓર્ડર માટે CBT અને SSRI દવાઓ સારવારના વિકલ્પો છે. લક્ષણોની ગંભીરતા, અગાઉની સારવાર અને વ્યક્તિની પસંદગી પ્રમાણે સંયુક્ત સારવાર અંગે વિચાર થઈ શકે છે; પરિણામો અલગ અલગ હોય છે.',
         },
         citationRef: 'The Lancet Meta-Analysis',
       },
