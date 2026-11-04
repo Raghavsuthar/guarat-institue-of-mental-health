@@ -281,4 +281,4 @@ This is a source-level change, not proof of visual acceptance. Screenshots at 36
 - Runtime audit follow-up: crisis detection now includes common high-signal English expressions; the local `.env` bootstrap was corrected for Vite and Express; CI now starts the built Express server and checks `/api/health`. See `docs/WEBSITE_RUNTIME_AUDIT_2026-11.md` and PR #8.
 
 
-- Runtime audit status: the branch now also fixes search-dialog accessibility/Escape handling, local `.env` loading, and deduplicates the expanded crisis phrase list. Current CI passed; browser/accessibility workflow remains in progress and Vercel preview is rate-limited. See `docs/WEBSITE_RUNTIME_AUDIT_2026-11.md`.
+- Runtime audit status: the branch now also fixes search-dialog accessibility/Escape handling, local `.env` loading, and deduplicates the expanded crisis phrase list. Latest-head CI and all 13 browser/accessibility tests passed; Vercel preview remains rate-limited. See `docs/WEBSITE_RUNTIME_AUDIT_2026-11.md`.
