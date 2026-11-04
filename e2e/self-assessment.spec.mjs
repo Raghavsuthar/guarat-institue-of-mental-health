@@ -125,5 +125,8 @@ test('search keyboard shortcut matches its visible hint and opens search', async
   await page.goto('/en');
   await expect(page.locator('header kbd')).toHaveText('Ctrl/⌘ K');
   await page.keyboard.press('Control+k');
-  await expect(page.getByRole('dialog')).toBeVisible();
+  const searchDialog = page.getByRole('dialog', { name: /search topics/i });
+  await expect(searchDialog).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(searchDialog).toHaveCount(0);
 });
