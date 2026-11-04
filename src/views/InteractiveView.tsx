@@ -24,7 +24,7 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
       description: currentLang === 'en'
         ? 'Educational questionnaires to help organize experiences before speaking with a healthcare professional. Adapted tools are not validated clinical screeners and their scores are not diagnostic.'
         : currentLang === 'hi'
-        ? 'डिप्रेशन और चिंता के लक्षणों को समझने के लिए प्रमाणित प्रश्नावली।'
+        ? 'ये प्रश्नावलियाँ स्वास्थ्य विशेषज्ञ से बातचीत की तैयारी में आपके अनुभवों को व्यवस्थित करने में मदद करती हैं। अनुकूलित प्रश्नों के अंक नैदानिक कट-ऑफ नहीं हैं।'
         : 'આરોગ્ય નિષ્ણાત સાથે વાત કરતાં પહેલાં તમારા અનુભવો સમજવા માટે શૈક્ષણિક પ્રશ્નાવલીઓ. બદલાયેલા સાધનોના ગુણ નિદાન નથી.',
       path: 'interactive',
       lang: currentLang,
@@ -46,7 +46,7 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
             ? 'These questionnaires help you organize experiences and concerns before a conversation with a healthcare professional. Adapted tools are educational only and must not be interpreted using clinical cut-offs.'
             : currentLang === 'hi'
             ? 'ये प्रश्नावलियाँ स्वास्थ्य विशेषज्ञ से बातचीत की तैयारी में आपके अनुभवों को व्यवस्थित करने में मदद करती हैं। अनुकूलित प्रश्नों के अंक नैदानिक कट-ऑफ नहीं हैं।'
-            : 'ડિપ્રેશન માટે PHQ-9 અને ચિંતા માટે GAD-7. આ ટૂલ માત્ર તમારા લક્ષણો સમજવા અને ડૉક્ટર સમક્ષ રજૂ કરવા માટે છે.'}
+            : 'આ પ્રશ્નાવલીઓ આરોગ્ય નિષ્ણાત સાથે વાતચીત પહેલાં તમારા અનુભવો ગોઠવવામાં મદદ કરે છે. બદલાયેલા પ્રશ્નોના ગુણ તબીબી કટ-ઓફ નથી.'}
         </p>
       </div>
 
