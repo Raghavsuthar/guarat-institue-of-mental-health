@@ -79,8 +79,8 @@
 
 ## Verification record
 
-- Final PR head: `e22e64862e0868ddad0accf895a7da4107a95356`.
-- CI & Quality Assurance: passed (run `41774922899`).
-- Browser, responsive, and axe smoke tests: passed (run `41774922885`).
+- Verified PR head before this plan bookkeeping update: `714c196fbc0b85465adfdb81136dcbc0910efb8e`.
+- CI & Quality Assurance: passed (run `41775294157`).
+- Browser, responsive, and axe smoke tests: passed (run `41775294207`).
 - Regression test: confirmed red on the baseline content and green after the content corrections.
 - Independent psychiatrist sign-off and fluent Hindi/Gujarati clinical-language review remain external review gates, not software acceptance criteria.
