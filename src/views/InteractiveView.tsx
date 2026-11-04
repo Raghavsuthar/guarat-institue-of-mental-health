@@ -22,10 +22,10 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
     updatePageSEO({
       title: currentLang === 'en' ? 'Mental Health Self-Reflection Tools' : currentLang === 'hi' ? 'मानसिक स्वास्थ्य आत्म-अवलोकन टूल' : 'માનસિક સ્વ-અવલોકન સાધનો',
       description: currentLang === 'en'
-        ? 'Validated depression and anxiety questionnaires (PHQ-9 and GAD-7) for self-reflection and preparing for a doctor consultation.'
+        ? 'Educational questionnaires to help organize experiences before speaking with a healthcare professional. Adapted tools are not validated clinical screeners and their scores are not diagnostic.'
         : currentLang === 'hi'
         ? 'डिप्रेशन और चिंता के लक्षणों को समझने के लिए प्रमाणित प्रश्नावली।'
-        : 'ડિપ્રેશન અને ચિંતાના લક્ષણોની સમજ માટે પ્રશ્નાવલિ.',
+        : 'આરોગ્ય નિષ્ણાત સાથે વાત કરતાં પહેલાં તમારા અનુભવો સમજવા માટે શૈક્ષણિક પ્રશ્નાવલીઓ. બદલાયેલા સાધનોના ગુણ નિદાન નથી.',
       path: 'interactive',
       lang: currentLang,
     });
@@ -43,9 +43,9 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
         </h1>
         <p className="text-sm sm:text-base text-stone-600 max-w-3xl leading-relaxed">
           {currentLang === 'en'
-            ? 'Standardized psychological self-report instruments (PHQ-9 for depressive symptoms and GAD-7 for generalized anxiety). These tools are provided strictly for education and structured reflection to help you prepare for clinical discussions with a doctor.'
+            ? 'These questionnaires help you organize experiences and concerns before a conversation with a healthcare professional. Adapted tools are educational only and must not be interpreted using clinical cut-offs.'
             : currentLang === 'hi'
-            ? 'डिप्रेशन के लक्षणों के लिए PHQ-9 और चिंता के लिए GAD-7। यह टूल केवल आत्म-अवलोकन के लिए है ताकि आप समझ सकें कि डॉक्टर से अपने मन की स्थिति कैसे साझा करें।'
+            ? 'ये प्रश्नावलियाँ स्वास्थ्य विशेषज्ञ से बातचीत की तैयारी में आपके अनुभवों को व्यवस्थित करने में मदद करती हैं। अनुकूलित प्रश्नों के अंक नैदानिक कट-ऑफ नहीं हैं।'
             : 'ડિપ્રેશન માટે PHQ-9 અને ચિંતા માટે GAD-7. આ ટૂલ માત્ર તમારા લક્ષણો સમજવા અને ડૉક્ટર સમક્ષ રજૂ કરવા માટે છે.'}
         </p>
       </div>
