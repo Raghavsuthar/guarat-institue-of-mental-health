@@ -11,14 +11,17 @@ const port = Number(process.env.SERVER_SMOKE_PORT || 4179);
 const server = spawn(process.execPath, [serverPath], {
   cwd: root,
   env: { ...process.env, NODE_ENV: 'production', PORT: String(port) },
-  stdio: 'ignore',
+  stdio: ['ignore', 'pipe', 'pipe'],
 });
+let serverOutput = '';
+server.stdout.on('data', (chunk) => { serverOutput += chunk.toString(); });
+server.stderr.on('data', (chunk) => { serverOutput += chunk.toString(); });
 
 try {
   let healthResponse;
   for (let attempt = 0; attempt < 40; attempt += 1) {
     if (server.exitCode !== null) {
-      throw new Error(`Production server exited before becoming ready (code ${server.exitCode}).`);
+      throw new Error(`Production server exited before becoming ready (code ${server.exitCode}). ${serverOutput}`);
     }
     try {
       healthResponse = await fetch(`http://127.0.0.1:${port}/api/health`, {
