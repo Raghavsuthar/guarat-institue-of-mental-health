@@ -13,6 +13,7 @@ Three reproducible defects were identified. All three have targeted fixes in thi
 |---|---|---|---|
 | High | Self-hosted/Docker build did not generate the server bundle required by its start command | `package.json` ran only `vite build`; Dockerfile and `npm start` required `dist/server.cjs`; Vite config had no production hook compiling `server.ts` | Build now validates content, generates sitemap, builds Vite, and bundles `server.ts` with esbuild to `dist/server.cjs`; Docker asserts the artifact exists |
 | High | Gemini client was instantiated without explicitly passing the server API key and used an unverified model identifier | Same configuration appeared in Vercel `api/qa.ts`, Express `server.ts`, and Vite dev API; official Google Gen AI SDK docs require an API key for Gemini Developer API | Pass `process.env.GEMINI_API_KEY`, use documented `gemini-flash-latest` by default, allow server-only `GEMINI_MODEL` override |
+| High | Crisis detection missed common high-signal English phrases (e.g. “I am suicidal”, “I want to hurt myself”, “I took too many pills”, “I am not safe with myself”) | Existing API-core tests failed on these phrases; the helper only matched a narrower set of substrings | Added explicit phrases and regression coverage through the existing test cases |
 | Medium | Mobile screener E2E assertion used an over-escaped regular expression | Latest main browser workflow `41790529609`: 10 passed, 1 failed; trace/log showed the app tap set `aria-pressed=true`, but progress assertion searched for a literal `\\d` | Corrected the regex to match the numeric answered count |
 
 ## Changes made
@@ -20,6 +21,8 @@ Three reproducible defects were identified. All three have targeted fixes in thi
 - `api/qa.ts`: explicit Gemini API key, documented default model alias, configurable server-side model constant.
 - `server.ts`: explicit key, shared model and shared safety prompt from `api/qa.ts`.
 - `server/apiPlugin.ts`: same Gemini model/key/prompt configuration for local Vite API parity.
+- `vite.config.ts` and `server.ts`: load server-only `.env` values with `dotenv/config`, so local Vite and Express API runtimes can read documented secrets without exposing them to client bundles.
+- `src/utils/crisisDetection.ts`: add common high-signal English self-harm and overdose expressions.
 - `package.json`: complete production build sequence including Express server bundle.
 - `Dockerfile`: fail the image build if `dist/server.cjs` is absent.
 - `e2e/self-assessment.spec.mjs`: correct mobile progress matcher.
@@ -36,7 +39,7 @@ Three reproducible defects were identified. All three have targeted fixes in thi
 
 - Main baseline CI run `41790529632` passed.
 - Main baseline browser run `41790529609` failed only on the mobile progress regex assertion (10 passed, 1 failed); the exact failing locator and line were read from the workflow log.
-- Fix-branch CI run `41804358885` passed validation, TypeScript, unit tests, and the production client/server build before the final shared-prompt cleanup commits.
+- Fix-branch CI run `41804358885` passed validation, TypeScript, unit tests, and the production client/server build before the final shared-prompt cleanup commits. A later run exposed missing crisis phrases in an existing regression test; those phrases have now been added and the latest-head workflow is running.
 - The browser workflow and CI were re-triggered after the final commits; final head results must be checked before merge.
 - No real Gemini request was made: deployment secrets are not read or exposed during this audit.
 - No live Vercel/Docker deployment was changed or claimed.
