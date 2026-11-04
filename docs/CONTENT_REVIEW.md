@@ -1,6 +1,6 @@
 # Clinical content review register
 
-**Last source-check date:** 2026-10-24  
+**Last source-check date:** 2026-11-04  
 **Scope:** Evidence-guide summaries added in Phase 5, batch 2.  
 **Review status:** Source links were checked against public guidance during authoring. This register does **not** claim independent consultant/clinician sign-off; a named clinical reviewer should be recorded only after that review actually occurs.
 
