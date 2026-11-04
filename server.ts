@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import { GEMINI_MODEL, QA_SYSTEM_INSTRUCTION } from './api/qa';
 import path from 'path';
