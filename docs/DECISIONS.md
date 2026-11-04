@@ -231,3 +231,25 @@ Implementation PRs #13 (API hardening), #15–#16 (visual/accessibility polish),
 - Rationale: the site is public-facing mental-health education; the interface should feel calm and approachable without weakening clinical clarity or emergency visibility.
 - Scope: CSS design layer and header accent only in this change. No clinical content, screening behavior, language routes, API behavior, or data handling is intentionally changed.
 - Verification: pending CI and preview review; do not describe this as production-applied until the PR is merged and deployed.
+
+
+## 2026-11-04 — Clinical content quality Phase 1
+
+**Implementation status:** In progress on `improve/clinical-content-quality-phase1`; separate from open production-server PR #1.
+
+### Decision
+
+- Audit the full 23-condition library before expanding the catalogue.
+- Use targeted corrections and automated regression tests rather than a broad rewrite of all clinical content.
+- Preserve the existing `Condition` and evidence-guide schemas, routes, and UI.
+- Keep all patient-facing fields in English, Hindi, and Gujarati.
+- Remove unsupported absolute outcome claims and qualify genetic, neurobiological, diagnostic-tool, and medication-safety wording.
+- Keep independent psychiatrist review and fluent clinical-language review explicitly pending.
+
+### Rationale
+
+The repository already contains evidence guides for all 23 main conditions, but structural coverage does not prove that individual claims are supported, current, clinically correct, or equivalently translated. A focused correction phase is safer and easier to review than a large unverified rewrite.
+
+### Release gate
+
+The branch must pass content validation, TypeScript checks, all tests, and the production build in CI. Even a green software build does not constitute clinical sign-off or prove translation equivalence. The PR remains draft and must not be treated as deployed until merged and verified in the hosting environment.

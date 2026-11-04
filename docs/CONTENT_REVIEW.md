@@ -1,6 +1,6 @@
 # Clinical content review register
 
-**Last source-check date:** 2026-10-24  
+**Last source-check date:** 2026-11-04  
 **Scope:** Evidence-guide summaries added in Phase 5, batch 2.  
 **Review status:** Source links were checked against public guidance during authoring. This register does **not** claim independent consultant/clinician sign-off; a named clinical reviewer should be recorded only after that review actually occurs.
 
@@ -34,3 +34,20 @@
 2. Recheck every guideline for update status before future clinical-content releases.
 3. Review the translated Hindi and Gujarati text with fluent clinical-language reviewers; automated completeness checks do not establish translation quality.
 4. Perform a browser-level check that source links and evidence cards render accessibly in all three languages.
+
+
+## 2026-11-04 — Phase 1 targeted safety corrections
+
+**Scope:** Static audit of all 23 published condition IDs and matching evidence-guide keys; targeted patient-facing copy corrections across 17 records. Full inventory: `docs/CONDITION_CONTENT_AUDIT_2026-11.md`.
+
+**Corrections recorded:**
+- Depression and bipolar disorder: removed simplified or deterministic biological/genetic explanations.
+- Schizophrenia: removed neurotransmitter-balance shorthand and inevitable-relapse wording.
+- Eating disorders: removed unsupported mortality, heritability, and fixed outcome percentages.
+- ADHD and autism: removed over-precise heritability, treatment-response, and diagnostic-tool accuracy claims.
+- Social anxiety, specific phobia, illness anxiety, PMDD, and personality disorders: removed fixed cure/response/remission promises.
+- Perinatal/postpartum content: removed blanket breastfeeding medication-safety claims, unsupported screening/outcome percentages, and statements that routine laboratory tests are required for everyone.
+
+**Source review:** Opened WHO depression and mhGAP pages; NICE CG185, NG69, NG87, CG128, CG159, and CG31 pages; ACOG CPG Nos. 4 and 5; and the NHS phobias treatment page. The audit document records source scope and links.
+
+**Review status:** This was source inspection and editorial correction, not independent clinician sign-off. Hindi and Gujarati strings were aligned by the authoring pass but have not received fluent clinical-language review. No “clinically reviewed” status is claimed. Six condition records received no targeted copy edits in this phase; all 23 require a complete source-to-claim review before clinical approval.
