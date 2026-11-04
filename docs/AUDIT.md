@@ -253,3 +253,18 @@ This is a source-level change, not proof of visual acceptance. Screenshots at 36
 - Updated the header accent from teal/gold/purple to forest/sand/sage so the brand accent aligns with the selected theme.
 - This is a source-level styling change only. Build, type-check, browser screenshots, mobile widths, contrast, and trilingual font rendering must be verified in CI/preview before merge. Crisis messaging remains visually distinct.
 
+
+
+## 2026-11-04 — Condition content quality audit update
+
+**Repository:** `Raghavsuthar/guarat-institue-of-mental-health`  
+**Base commit:** `48f5a73c67f0053548ed664944f4ec89e964d12c`  
+**Working branch:** `improve/clinical-content-quality-phase1`
+
+- Static inventory confirms 23 main condition records and 23 matching evidence-guide keys.
+- Existing validation checks selected localized fields for presence, not semantic translation parity or claim-level clinical correctness.
+- Targeted editorial corrections are being made in 14 condition records; the full inventory and the nine records still awaiting focused claim review are documented in `docs/CONDITION_CONTENT_AUDIT_2026-11.md`.
+- Added a regression test for high-risk cure/response guarantees, deterministic genetic language, inevitable-relapse claims, diagnostic-tool accuracy claims, and blanket breastfeeding-safety wording.
+- The new test was observed failing on the original content for seven pattern groups. Final CI status after the corrections remains pending.
+- Current sources opened for the targeted corrections include WHO depression/mhGAP, NICE bipolar/eating disorders/ADHD/autism/social anxiety/OCD-BDD guidance, ACOG perinatal guidelines, and NHS phobia guidance.
+- This is not a full clinical review, independent psychiatrist sign-off, fluent translation review, external-link crawl, or live deployment verification.
