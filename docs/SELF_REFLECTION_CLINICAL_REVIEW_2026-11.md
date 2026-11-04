@@ -1,7 +1,7 @@
 # Self-Reflection Tools: Clinical Review and Release Gate
 
 **Review date:** 4 November 2026  
-**Status:** Engineering safety corrections in progress; not a substitute for clinical, licensing, or translation approval.
+**Status:** Engineering safety corrections merged; follow-up source-fidelity and rights review in progress. This is not a substitute for clinical, licensing, or translation approval.
 
 ## Classification shown in the application
 
@@ -26,8 +26,16 @@ Sleep difficulty reflection: seven items are currently shown with generic anchor
 - Adapted and pending-review tools do not display a clinical score or clinical interpretation.
 - Self-harm endorsements in PHQ-9 item 9 and postpartum reflection item 5 surface immediate support before the user completes the questionnaire. If there is imminent danger, users are directed to 112 / nearest emergency department; Tele-MANAS 14416 is also shown.
 
+## Rights and reproduction review (not legal advice)
+
+- **GAD-7:** The American Thoracic Society outcome-measure page lists no licence requirement and free use. Preserve attribution to Spitzer et al. (2006) and verify the exact source version used.
+- **PHQ-9:** Public sources conflict in their summaries of Pfizer terms. Some institutional sources say no permission is required; an archived Pfizer terms document describes narrower conditions (clinical/research/education settings, no modification or translation). Do not assume a public website reproduction is cleared solely from secondary summaries; confirm the currently applicable terms with the rights holder or use a clearly authorized source version.
+- **ASRS v1.1 6-item screener:** NYU's licensing page permits electronic versions and requires attribution, but says no other modifications are permitted. The current localized paraphrases must not be represented as an authorized faithful electronic version until compared against the official patient-facing file and language-specific authorized forms.
+- **DAST-10:** NIH and other sources identify copyright by Harvey A. Skinner / CAMH and describe non-commercial reproduction with attribution, while other instrument registries indicate authorization is required. Confirm the applicable terms for this specific public website and retain written permission where required.
+- **SCOFF:** The five-item tool and threshold are described in published sources, but permission to reproduce the exact wording and translations in this app has not been established. Obtain rights-holder/institutional confirmation before presenting the current copy as an exact instrument.
+
 ## Required before public claims or release sign-off
-1. Compare every recognized instrument item, response option, recall period, scoring rule, and interpretation against the authoritative source version.
+1. Compare every recognized instrument item, response option, recall period, scoring rule, and interpretation against the authoritative source version; keep any unverified or modified copy clearly labelled as educational adaptation.
 2. Confirm permissions/licensing for public reproduction, including translations and digital use.
 3. Obtain fluent Gujarati and Hindi clinical-language review; current localization completeness does not establish semantic equivalence or psychometric validation.
 4. Have a qualified clinician review crisis wording, escalation paths, postpartum safety language, and referral guidance.
