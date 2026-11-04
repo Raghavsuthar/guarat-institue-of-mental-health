@@ -121,7 +121,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={onOpenSearch}
             className="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200/80 text-slate-700 active:scale-[0.97] text-sm border border-slate-200 hover:border-teal-400/60 transition cursor-pointer min-h-[44px] shadow-2xs"
             title={t.search.placeholder}
-            aria-label={`${currentLang === 'en' ? 'Search topics' : currentLang === 'hi' ? 'खोजें...' : 'શોધો...'} — ${t.search.placeholder}`}
+            aria-label={`${currentLang === 'en' ? 'Search topics' : currentLang === 'hi' ? 'खोजें...' : 'શોધો...'} — ${t.search.placeholder} — Ctrl/⌘ K`}
           >
             <Search className="w-4 h-4 text-teal-600" />
             <span className="hidden sm:inline text-xs text-slate-700 font-medium">
