@@ -679,9 +679,9 @@ export const newConditionsBatch2: Condition[] = [
       },
       {
         fact: {
-          en: 'Randomized clinical trials show that multi-component stimulus control and sleep consolidation restriction reliably achieve clinical remission in 70% to 80% of adult patients with chronic psychophysiological insomnia.',
-          hi: 'क्लिनिकल अध्ययनों में देखा गया है कि स्टिमुलस कंट्रोल और स्लीप रिस्ट्रिक्शन तकनीकों से 70% से 80% मरीजों की पुरानी अनिद्रा पूरी तरह ठीक हो जाती है।',
-          gu: 'ક્લિનિકલ ટ્રાયલ્સ સાબિત કરે છે કે સ્ટીમ્યુલસ કંટ્રોલ અને સ્લીપ રિસ્ટ્રિક્શન પદ્ધતિઓથી ૭૦% થી ૮૦% દર્દીઓની જૂની અનિદ્રા સંપૂર્ણપણે મટી જાય છે.',
+          en: 'Clinical trials support multicomponent cognitive behavioural therapy for insomnia (CBT-I), which may include stimulus control and sleep restriction. Response varies between individuals, and remission should not be promised as a fixed outcome.',
+          hi: 'क्लिनिकल प्रमाण अनिद्रा के लिए बहु-घटक कॉग्निटिव बिहेवियरल थेरेपी (CBT-I) का समर्थन करते हैं, जिसमें स्टिमुलस कंट्रोल और स्लीप रिस्ट्रिक्शन शामिल हो सकते हैं। असर व्यक्ति के अनुसार अलग होता है; पूरी तरह ठीक होने की गारंटी नहीं देनी चाहिए।',
+          gu: 'ક્લિનિકલ પુરાવા અનિદ્રા માટે બહુ-ઘટક કોગ્નિટિવ બિહેવિયરલ થેરાપી (CBT-I) ને સમર્થન આપે છે, જેમાં સ્ટીમ્યુલસ કંટ્રોલ અને સ્લીપ રિસ્ટ્રિક્શન સામેલ હોઈ શકે છે. પ્રતિભાવ વ્યક્તિ પ્રમાણે બદલાય છે; સંપૂર્ણ સાજા થવાની ખાતરી આપવી યોગ્ય નથી.',
         },
         citationRef: 'European Sleep Research Society Guideline',
       },
