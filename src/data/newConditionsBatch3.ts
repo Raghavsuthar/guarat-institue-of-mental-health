@@ -848,7 +848,7 @@ export const newConditionsBatch3: Condition[] = [
         gu: 'IPT અને CBT કાઉન્સેલિંગ દ્વારા નવી જવાબદારીઓ સ્વીકારવાની માનસિક હિંમત આપવી.',
       },
       medications: {
-        en: 'Some antidepressants, including sertraline, may be considered during breastfeeding after an individualized review of the mother's symptoms, previous treatment, infant factors, and potential benefits and risks. Medication decisions should be made with the treating clinician.',
+        en: 'Some antidepressants, including sertraline, may be considered during breastfeeding after an individualized review of maternal symptoms, previous treatment, factors related to the infant, and potential benefits and risks. Medication decisions should be made with the treating clinician.',
         hi: 'कुछ एंटीडिप्रेसेंट, जैसे सर्ट्रालाइन, स्तनपान के दौरान व्यक्तिगत लाभ-जोखिम समीक्षा के बाद उपयोग किए जा सकते हैं। दवा का निर्णय माँ के लक्षणों, पहले के उपचार, शिशु की स्थिति और संभावित लाभ-जोखिम पर विचार करके चिकित्सक के साथ लेना चाहिए।',
         gu: 'સર્ટ્રાલાઇન જેવી કેટલીક એન્ટીડિપ્રેસન્ટ દવાઓ સ્તનપાન દરમિયાન વ્યક્તિગત લાભ-જોખમની સમીક્ષા પછી ઉપયોગમાં લઈ શકાય છે. દવા અંગેનો નિર્ણય માતાના લક્ષણો, અગાઉની સારવાર, બાળકની સ્થિતિ અને સંભવિત લાભ-જોખમ ધ્યાનમાં રાખીને તબીબ સાથે લેવો જોઈએ.',
       },
@@ -864,7 +864,7 @@ export const newConditionsBatch3: Condition[] = [
       gu: 'ડિપ્રેશનમાંથી મુક્તિ, બાળક સાથે પ્રેમાળ જોડાણ અને માતાનું ઉત્તમ સ્વાસ્થ્ય.',
     },
     recoveryOutlook: {
-      en: 'The recovery outlook for perinatal and postpartum depression and anxiety is exceptionally high when diagnosed and treated proactively. Clinical outcome data consistently demonstrate that many people improve with timely, individualized care that may include psychotherapy, medication when appropriate, practical support, and follow-up. The pace and extent of recovery vary. Treatment decisions during breastfeeding should consider the mother's needs, previous response, infant factors, and potential benefits and risks; support can also help strengthen parent-infant relationships.',
+      en: 'The recovery outlook for perinatal and postpartum depression and anxiety is exceptionally high when diagnosed and treated proactively. Clinical outcome data consistently demonstrate that many people improve with timely, individualized care that may include psychotherapy, medication when appropriate, practical support, and follow-up. The pace and extent of recovery vary. Treatment decisions during breastfeeding should consider maternal needs, previous response, factors related to the infant, and potential benefits and risks; support can also help strengthen parent-infant relationships.',
       hi: 'प्रसवोत्तर अवसाद और चिंता से ठीक होने की संभावना (रिकवरी आउटलुक) अत्यंत उत्साहजनक और मजबूत है, बशर्ते समय रहते सही चिकित्सकीय मदद ली जाए। वैज्ञानिक अध्ययनों से सिद्ध हुआ है कि समय पर व्यक्तिगत सहायता मिलने पर कई लोगों में सुधार हो सकता है। देखभाल में मनोचिकित्सा, जरूरत के अनुसार दवा, व्यावहारिक सहयोग और नियमित फॉलो-अप शामिल हो सकते हैं। सुधार की गति और सीमा अलग-अलग होती है। स्तनपान के दौरान दवा का निर्णय माँ की जरूरतों, पहले के उपचार, शिशु की स्थिति और संभावित लाभ-जोखिम पर विचार करके चिकित्सक के साथ लेना चाहिए। सहायता से माता-पिता और शिशु के संबंध को मजबूत बनाने में भी मदद मिल सकती है।',
       gu: 'પોસ્ટપાર્ટમ ડિપ્રેશન અને ચિંતામાંથી સાજા થવાની સંભાવના ખૂબ જ ઊંચી અને ઉત્સાહજનક છે. તબીબી આંકડાઓ સ્પષ્ટપણે દર્શાવે છે કે સમયસર વ્યક્તિગત સહાય મળવાથી ઘણા લોકોમાં સુધારો થઈ શકે છે. સારવારમાં મનોવૈજ્ઞાનિક થેરાપી, જરૂર મુજબ દવા, વ્યવહારુ સહાય અને નિયમિત ફોલો-અપ સામેલ હોઈ શકે છે. સુધારાની ગતિ અને હદ દરેક વ્યક્તિમાં અલગ હોય છે. સ્તનપાન દરમિયાન દવા અંગેનો નિર્ણય માતાની જરૂરિયાત, અગાઉની સારવાર, બાળકની સ્થિતિ અને સંભવિત લાભ-જોખમ ધ્યાનમાં રાખીને તબીબ સાથે લેવો જોઈએ. સહાય માતા-બાળકના સંબંધને મજબૂત બનાવવામાં પણ મદદ કરી શકે છે.',
     },
@@ -900,7 +900,7 @@ export const newConditionsBatch3: Condition[] = [
           gu: 'શું સ્તનપાન કરાવતી વખતે દવાઓ લઈ શકાય?',
         },
         answer: {
-          en: 'Some antidepressants, including sertraline, may be options during breastfeeding. The decision should be individualized with a clinician, considering the mother's symptoms and previous response, the infant's health and age, and potential benefits and risks.',
+          en: 'Some antidepressants, including sertraline, may be options during breastfeeding. The decision should be individualized with a clinician, considering maternal symptoms and previous response, the infant's health and age, and potential benefits and risks.',
           hi: 'कुछ एंटीडिप्रेसेंट स्तनपान के दौरान विकल्प हो सकते हैं। माँ के लक्षणों और पहले के उपचार, शिशु के स्वास्थ्य और उम्र तथा संभावित लाभ-जोखिम पर विचार करके चिकित्सक के साथ व्यक्तिगत निर्णय लेना चाहिए।',
           gu: 'કેટલીક એન્ટીડિપ્રેસન્ટ દવાઓ સ્તનપાન દરમિયાન વિકલ્પ હોઈ શકે છે. માતાના લક્ષણો અને અગાઉની સારવાર, બાળકનું આરોગ્ય અને ઉંમર તથા સંભવિત લાભ-જોખમ ધ્યાનમાં રાખીને તબીબ સાથે વ્યક્તિગત નિર્ણય લેવો જોઈએ.',
         },
