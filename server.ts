@@ -1,4 +1,5 @@
 import express from 'express';
+import { GEMINI_MODEL } from './api/qa';
 import path from 'path';
 import { apiErrorMessage, apiErrorStatus, enforceRateLimit, getAnalyticsSummary, hasValidAdminToken, isCrisisQuery, recordAnalyticsPing } from './server/shared/analytics';
 
@@ -127,7 +128,7 @@ app.post('/api/qa', async (req, res) => {
     }
 
     const { GoogleGenAI } = await import('@google/genai');
-    const ai = new GoogleGenAI({});
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
     const systemInstruction = `You are an educational assistant for Mindcare, a public mental-health education portal. Do not make claims about the author's credentials or provide individualized clinical care.
 
@@ -142,7 +143,7 @@ MANDATORY SAFETY AND ETHICAL BOUNDARIES:
 8. Always conclude with a calm reminder: "This information is for education only. Please consult a registered psychiatrist or MBBS doctor for an individualized clinical assessment."`;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-3.8-flash',
+      model: GEMINI_MODEL,
       contents: [{ role: 'user', parts: [{ text: query }] }],
       config: {
         systemInstruction,
