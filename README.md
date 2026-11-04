@@ -2,7 +2,7 @@
 
 An evidence-based, trilingual public psychiatry and mental health education platform authored and curated by **Gujarat Institute of Mental Health**. Available in **English**, **हिन्दी (Hindi)**, and **ગુજરાતી (Gujarati)**.
 
-Designed to dismantle mental health stigma, explain clinical psychiatric conditions scientifically, provide compassionate psychoeducation, offer evidence-based self-screeners, and connect individuals directly to verified 24x7 crisis helplines across India (Tele-MANAS **14416** and Emergency **112**).
+Designed to dismantle mental health stigma, explain clinical psychiatric conditions scientifically, provide compassionate psychoeducation, offer educational self-reflection tools, and connect individuals directly to verified 24x7 crisis helplines across India (Tele-MANAS **14416** and Emergency **112**).
 
 ---
 
@@ -15,7 +15,7 @@ Designed to dismantle mental health stigma, explain clinical psychiatric conditi
   - Women's Mental Health (PMDD, Perinatal & Postpartum Depression, Menopausal Mood Syndromes, etc.)
   - Substance Use & Addiction Recovery (Alcohol, Nicotine, Cannabis, Opioids, Sedatives, Inhalants, etc.)
 - **Evidence-Based Treatments**: Clear psychoeducation on Psychotherapy (CBT, ERP, DBT), Somatic/Neuromodulation interventions (ECT, rTMS), and Lifestyle Medicine.
-- **Interactive Validated Screeners**: Interactive clinical screening tools (PHQ-9 for Depression, GAD-7 for Anxiety, AUDIT-C for Alcohol, ADHD ASRS v1.1, CAGE, etc.) with scoring guides and disclaimers.
+- **Educational Self-Reflection Tools**: PHQ-9 and GAD-7 references plus adapted reflections for mood, alcohol, attention, sleep, trauma, and other concerns. The app versions are not independently validated; adapted reflections do not use clinical cut-offs and no tool provides a diagnosis.
 - **Crisis Intervention**: Immediate emergency banner with one-tap dialing to Tele-MANAS (**14416**), Kiran (**1800-599-0019**), and emergency services (**112**).
 - **Progressive Web App (PWA)**: Offline-first architecture with service worker caching, home screen install prompt, and native-like offline browsing.
 - **Educational Q&A Assistant**: Powered by Google Gemini with strict ethical bounds, crisis detection short-circuiting, and offline fallback.
