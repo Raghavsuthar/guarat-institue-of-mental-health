@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Validate, Lint & Build
+    name: Validate, Test & Build
     runs-on: ubuntu-latest
 
     steps:
@@ -19,28 +19,44 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
-      - name: Install Dependencies
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci || npm install
-          else
-            npm install
-          fi
+      - name: Install locked Dependencies
+        run: npm ci
 
       - name: Audit dependency vulnerabilities (report-only)
         run: |
           npm audit --json > /tmp/npm-audit.json || true
           node -e "const a=require('/tmp/npm-audit.json'); console.log(JSON.stringify({metadata:a.metadata?.vulnerabilities, advisories:Object.entries(a.vulnerabilities||{}).map(([name,v])=>({name,severity:v.severity,range:v.range,fixAvailable:v.fixAvailable,via:v.via.map(x=>typeof x==='string'?x:{name:x.name,title:x.title,url:x.url,range:x.range})}))},null,2))"
 
-      - name: Validate Trilingual Content Integrity
+      - name: Validate trilingual content
         run: npm run validate
 
-      - name: Check TypeScript Types & Linting
+      - name: Type-check
         run: npm run lint
 
       - name: Run API Safety Tests
         run: npm test
 
-      - name: Build Production Bundle & Server
+      - name: Build Production Frontend and Express Server
         run: npm run build
+
+      - name: Smoke-test built production server
+        run: npm run test:server
+
+      - name: Build Docker image
+        run: docker build --tag gimh-portal:ci .
+
+      - name: Smoke-test Docker container
+        run: |
+          set -euo pipefail
+          docker run --detach --name gimh-portal-smoke -p 4179:3000 gimh-portal:ci
+          trap 'docker logs gimh-portal-smoke || true; docker rm --force gimh-portal-smoke >/dev/null 2>&1 || true' EXIT
+          for attempt in $(seq 1 20); do
+            if curl --fail --silent http://127.0.0.1:4179/api/health -o /tmp/gimh-health.json; then
+              break
+            fi
+            sleep 1
+          done
+          node -e "const health=JSON.parse(require('node:fs').readFileSync('/tmp/gimh-health.json','utf8')); if (health.status !== 'ok') process.exit(1)"
+          curl --fail --silent http://127.0.0.1:4179/en/privacy | grep -q 'id="root"'

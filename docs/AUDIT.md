@@ -253,3 +253,14 @@ This is a source-level change, not proof of visual acceptance. Screenshots at 36
 - Updated the header accent from teal/gold/purple to forest/sand/sage so the brand accent aligns with the selected theme.
 - This is a source-level styling change only. Build, type-check, browser screenshots, mobile widths, contrast, and trilingual font rendering must be verified in CI/preview before merge. Crisis messaging remains visually distinct.
 
+
+
+## 2026-11-04 — Production server build and runtime verification
+
+- The 2026-11-04 source audit found a mismatch: `npm run build` ran only Vite, while `npm start` and the Dockerfile expected `dist/server.cjs`. The test-first CI run failed at the new server smoke check before the build fix (PR #1 test commit `8f8e3f7`).
+- The build now runs content validation, sitemap generation, Vite, and the existing esbuild CLI to create `dist/server.cjs` as a Node 22 CommonJS bundle with npm packages externalized. No dependency was added.
+- Verified on PR #1 head `b1027b4`: CI run [41768135612](https://github.com/Raghavsuthar/guarat-institue-of-mental-health/actions/runs/41768135612) passed locked installation, content validation, TypeScript type-check, all 12 Node tests, production build, direct Express smoke test, Docker image build, and Docker-container smoke test. The direct and container smoke checks both verified JSON health and the language-prefixed SPA route.
+- Browser/accessibility run [41768135622](https://github.com/Raghavsuthar/guarat-institue-of-mental-health/actions/runs/41768135622) passed all 7 Chromium tests: English/Hindi/Gujarati privacy pages, terms navigation, the narrow axe scan, common viewport overflow, and matching screener selection.
+- The npm audit snapshot reported **19 advisories (3 low, 10 moderate, 5 high, 1 critical)**. The critical finding is `proxy-addr` versions 1.1.0–2.0.7 (GHSA-jqcg-44mw-7w3h); high-severity affected packages include `body-parser`, `brace-expansion`, `sharp`, `source-map-js`, and `vite`. The workflow is report-only and this PR does not remediate those dependencies. Security sign-off remains blocked until the dependency tree is reviewed and safely updated.
+- Earlier audit notes stating that dedicated Vercel API handlers were absent are superseded: the current source contains `api/health.ts`, `api/qa.ts`, and `api/analytics/*` handlers plus shared Redis-backed analytics helpers. Their live production behavior and environment configuration were not verified in this build task.
+- This PR remains unmerged. No production deployment, live Vercel API check, or security clearance is claimed.
