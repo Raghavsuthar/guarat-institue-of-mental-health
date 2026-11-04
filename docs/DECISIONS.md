@@ -272,3 +272,10 @@ The previous build command could not produce the artifact required by the Docker
 ### Release gate
 
 A green GitHub build proves compilation and automated checks only. It does not prove production secrets, external services, Docker startup, live deployment, clinical content, or translations.
+
+
+### Additional reliability decisions
+
+- Broaden crisis-language detection for high-signal expressions already represented by regression tests; crisis detection remains an escalation heuristic, not a clinical assessment.
+- Load server-only `.env` configuration in local Vite middleware and the standalone Express runtime. Do not use `VITE_` prefixes for secrets.
+- Exercise the self-hosted production server in CI with a health-endpoint smoke test after building its bundle.
