@@ -63,16 +63,23 @@ test('adapted and pending-review tools never show a clinical score or severity b
 
 test('PHQ-9 and GAD-7 wording corrections are localized', () => {
   assert.match(getQuestionText('phq9', 5, 'en'), /poor appetite or overeating/i);
+  assert.match(screenersData.find((tool) => tool.id === 'phq9')!.questions[4].text.hi, /भूख कम लगना/);
+  assert.match(screenersData.find((tool) => tool.id === 'phq9')!.questions[4].text.gu, /ભૂખ ઓછી લાગવી/);
   assert.match(getQuestionText('gad7', 4, 'en'), /trouble relaxing/i);
+  assert.equal(screenersData.find((tool) => tool.id === 'gad7')!.questions[3].text.en, 'Trouble relaxing');
   assert.doesNotMatch(getQuestionText('gad7', 4, 'en'), /sitting still/i);
 });
 
-test('PHQ-9 separates moderately severe and severe score bands', () => {
+test('PHQ-9 source data separates moderately severe and severe score bands', () => {
+  const bands = screenersData.find((tool) => tool.id === 'phq9')!.interpretations;
+  assert.deepEqual(bands.slice(-2).map(({ minScore, maxScore }) => [minScore, maxScore]), [[15, 19], [20, 27]]);
   assert.equal(getResultPresentation('phq9', 17).band, 'moderately-severe');
   assert.equal(getResultPresentation('phq9', 21).band, 'severe');
 });
 
-test('DAST-10 separates substantial and severe score bands', () => {
+test('DAST-10 source data separates substantial and severe score bands', () => {
+  const bands = screenersData.find((tool) => tool.id === 'dast10')!.interpretations;
+  assert.deepEqual(bands.map(({ minScore, maxScore }) => [minScore, maxScore]), [[0, 0], [1, 2], [3, 5], [6, 8], [9, 10]]);
   assert.equal(getResultPresentation('dast10', 8).band, 'substantial');
   assert.equal(getResultPresentation('dast10', 9).band, 'severe');
 });
