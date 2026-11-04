@@ -38,7 +38,7 @@
 
 ## 2026-11-04 — Phase 1 targeted safety corrections
 
-**Scope:** Static audit of all 23 published condition IDs and matching evidence-guide keys; targeted patient-facing copy corrections across 14 records. Full inventory: `docs/CONDITION_CONTENT_AUDIT_2026-11.md`.
+**Scope:** Static audit of all 23 published condition IDs and matching evidence-guide keys; targeted patient-facing copy corrections across 17 records. Full inventory: `docs/CONDITION_CONTENT_AUDIT_2026-11.md`.
 
 **Corrections recorded:**
 - Depression and bipolar disorder: removed simplified or deterministic biological/genetic explanations.
@@ -50,4 +50,4 @@
 
 **Source review:** Opened WHO depression and mhGAP pages; NICE CG185, NG69, NG87, CG128, CG159, and CG31 pages; ACOG CPG Nos. 4 and 5; and the NHS phobias treatment page. The audit document records source scope and links.
 
-**Review status:** This was source inspection and editorial correction, not independent clinician sign-off. Hindi and Gujarati strings were aligned by the authoring pass but have not received fluent clinical-language review. No “clinically reviewed” status is claimed. Nine condition records remain due for targeted claim-level review, and all 23 require a complete source-to-claim review before clinical approval.
+**Review status:** This was source inspection and editorial correction, not independent clinician sign-off. Hindi and Gujarati strings were aligned by the authoring pass but have not received fluent clinical-language review. No “clinically reviewed” status is claimed. Six condition records received no targeted copy edits in this phase; all 23 require a complete source-to-claim review before clinical approval.
