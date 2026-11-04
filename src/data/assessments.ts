@@ -687,9 +687,9 @@ export const screenersData: ScreenerTool[] = [
   {
     id: 'isi',
     name: {
-      en: 'Insomnia Severity Index (ISI Educational Screener)',
-      hi: 'अनिद्रा गंभीरता सूचकांक (ISI शैक्षणिक टूल)',
-      gu: 'અનિદ્રા તીવ્રતા સૂચકાંક (ISI શૈક્ષણિક ટૂલ)',
+      en: 'Sleep Difficulty Reflection (adapted educational questions; not scored as the ISI)',
+      hi: 'नींद की कठिनाइयों का आत्म-अवलोकन (अनुकूलित शैक्षणिक प्रश्न; ISI स्कोर नहीं)',
+      gu: 'ઊંઘની તકલીફનું આત્મ-અવલોકન (બદલાયેલા શૈક્ષણિક પ્રશ્નો; ISI સ્કોર નથી)',
     },
     purpose: {
       en: 'Educational reflection assessing the nature, severity, and daytime impact of insomnia symptoms over the past 2 weeks.',

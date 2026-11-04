@@ -3,6 +3,7 @@ import { X, ShieldAlert, RotateCcw, Phone } from 'lucide-react';
 import { Language } from '../types';
 import { screenersData, ScreenerTool } from '../data/assessments';
 import { translations } from '../data/translations';
+import { getAssessmentCategory, getQuestionText, getResultPresentation } from '../utils/assessmentSafety';
 
 interface ScreenerModalProps {
   isOpen: boolean;
@@ -79,6 +80,17 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
   const interpretation = activeTool.interpretations.find(
     (item) => totalScore >= item.minScore && totalScore <= item.maxScore
   ) || activeTool.interpretations[0];
+  const resultPresentation = getResultPresentation(activeTool.id, totalScore);
+  const assessmentCategory = getAssessmentCategory(activeTool.id);
+  const resultLevel = activeTool.id === 'phq9' && totalScore >= 20
+    ? ({ en: 'Severe symptoms', hi: 'गंभीर लक्षण', gu: 'ગંભીર લક્ષણો' }[currentLang])
+    : activeTool.id === 'phq9' && totalScore >= 15
+    ? ({ en: 'Moderately severe symptoms', hi: 'मध्यम से गंभीर लक्षण', gu: 'મધ્યમથી ગંભીર લક્ષણો' }[currentLang])
+    : activeTool.id === 'dast10' && totalScore >= 9
+    ? ({ en: 'Severe level', hi: 'गंभीर स्तर', gu: 'ગંભીર સ્તર' }[currentLang])
+    : activeTool.id === 'dast10' && totalScore >= 6
+    ? ({ en: 'Substantial level', hi: 'काफी अधिक स्तर', gu: 'નોંધપાત્ર સ્તર' }[currentLang])
+    : interpretation.level[currentLang];
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 p-2 sm:p-4 overflow-y-auto overscroll-contain modal-scroll-backdrop" role="dialog" aria-modal="true" aria-labelledby="screener-dialog-title" style={{ WebkitOverflowScrolling: 'touch' }}>
@@ -171,7 +183,7 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
                           #{idx + 1}
                         </span>
                         <p className="text-sm font-semibold text-[#1c2430] leading-snug">
-                          {q.text[currentLang]}
+                          {getQuestionText(activeTool.id, q.id, currentLang, q.text[currentLang])}
                         </p>
                       </div>
 
@@ -200,6 +212,26 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
                   );
                 })}
               </div>
+
+              {isCrisisTriggered && (
+                <div role="alert" className="p-4 rounded-lg border border-red-300 bg-red-50 space-y-2">
+                  <p className="text-sm font-semibold text-red-900">
+                    {currentLang === 'en' ? 'Please seek support now' : currentLang === 'hi' ? 'कृपया अभी सहायता लें' : 'કૃપા કરીને અત્યારે મદદ લો'}
+                  </p>
+                  <p className="text-xs text-stone-800">
+                    {currentLang === 'en'
+                      ? 'You selected an answer about thoughts of self-harm. You do not need to wait for the questionnaire result. If you may act on these thoughts or cannot stay safe, call 112 or go to the nearest emergency department. Tele-MANAS is available at 14416.'
+                      : currentLang === 'hi'
+                      ? 'आपने खुद को नुकसान पहुंचाने वाले विचारों से जुड़ा उत्तर चुना है। प्रश्नावली पूरी होने की प्रतीक्षा न करें। यदि आप स्वयं को सुरक्षित नहीं रख पा रहे हैं, तो 112 पर कॉल करें या निकटतम आपातकालीन विभाग जाएं। टेली-मानस 14416 पर उपलब्ध है।'
+                      : 'તમે પોતાને નુકસાન પહોંચાડવાના વિચારો અંગેનો જવાબ પસંદ કર્યો છે. પ્રશ્નાવલી પૂરી થાય તેની રાહ ન જુઓ. જો તમે સુરક્ષિત ન રહી શકો તેમ લાગે તો 112 પર કૉલ કરો અથવા નજીકના ઇમરજન્સી વિભાગમાં જાઓ. ટેલી-માનસ 14416 પર ઉપલબ્ધ છે.'}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <a href="tel:112" className="px-3 py-2 rounded bg-red-800 text-white text-xs font-semibold min-h-[40px]">Call 112</a>
+                    <a href="tel:14416" className="px-3 py-2 rounded bg-red-800 text-white text-xs font-semibold min-h-[40px]">Call 14416</a>
+                    <button onClick={onOpenCrisis} className="px-3 py-2 rounded bg-stone-800 text-white text-xs font-semibold min-h-[40px]">Emergency guide</button>
+                  </div>
+                </div>
+              )}
 
               {/* Action Bar */}
               <div className="pt-3 border-t border-stone-200 flex items-center justify-between">
@@ -279,8 +311,8 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
                 </div>
               )}
 
-              {/* Score Display Card */}
-              <div className="p-6 bg-stone-50 border border-stone-200 rounded-lg text-center space-y-2">
+              {/* Only tools with reviewed scoring display a numerical result. */}
+              {resultPresentation.showScore && <div className="p-6 bg-stone-50 border border-stone-200 rounded-lg text-center space-y-2">
                 <span className="text-xs font-semibold uppercase tracking-wider text-stone-500">
                   {activeTool.positiveResponseThresholds ? 'Positive Responses' : 'Educational Reflection Score'}
                 </span>
@@ -288,11 +320,11 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
                   {totalScore} <span className="text-lg text-stone-400 font-normal">/ {maxScore}</span>
                 </div>
                 <div className="inline-block px-3 py-1 rounded-full bg-[#ccfbf1] text-[#115e59] text-xs font-semibold">
-                  {interpretation.level[currentLang]}
+                  {resultLevel}
                 </div>
-              </div>
+              </div>}
 
-              {/* Reflection Interpretation */}
+              {resultPresentation.showInterpretation ? (
               <div className="p-5 bg-white border border-stone-200 rounded-lg space-y-3">
                 <h4 className="text-sm font-semibold text-[#1c2430]">
                   {currentLang === 'en' ? 'What Your Responses Suggest:' : currentLang === 'hi' ? 'आपके उत्तर क्या दर्शाते हैं:' : 'તમારા જવાબો શું દર્શાવે છે:'}
@@ -310,6 +342,25 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
                   </p>
                 </div>
               </div>
+              ) : (
+                <div className="p-5 bg-stone-50 border border-stone-200 rounded-lg space-y-2">
+                  <h4 className="text-sm font-semibold text-[#1c2430]">
+                    {currentLang === 'en' ? 'Your reflections' : currentLang === 'hi' ? 'आपके अनुभव' : 'તમારા અનુભવો'}
+                  </h4>
+                  <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
+                    {currentLang === 'en'
+                      ? 'These questions are adapted for education and discussion. No validated clinical score or severity category is calculated. Consider discussing any concerns with a qualified healthcare professional.'
+                      : currentLang === 'hi'
+                      ? 'ये प्रश्न शैक्षणिक जानकारी और चर्चा के लिए अनुकूलित हैं। इनसे कोई मान्य नैदानिक स्कोर या गंभीरता श्रेणी निर्धारित नहीं होती। अपनी चिंता किसी योग्य स्वास्थ्य विशेषज्ञ से साझा करें।'
+                      : 'આ પ્રશ્નો શૈક્ષણિક સમજ અને ચર્ચા માટે બદલવામાં આવ્યા છે. તેમાંથી કોઈ માન્ય તબીબી સ્કોર કે ગંભીરતાનું સ્તર નક્કી થતું નથી. તમારી ચિંતા યોગ્ય આરોગ્ય નિષ્ણાત સાથે ચર્ચો.'}
+                  </p>
+                  {assessmentCategory === 'pending-review' && (
+                    <p className="text-xs text-amber-800">
+                      {currentLang === 'en' ? 'This instrument is pending item-anchor and permission review.' : currentLang === 'hi' ? 'इस टूल के प्रश्न-विकल्प और अनुमति की समीक्षा बाकी है।' : 'આ સાધનના પ્રશ્નોના વિકલ્પો અને પરવાનગીની સમીક્ષા બાકી છે.'}
+                    </p>
+                  )}
+                </div>
+              )}
 
               {/* Strictly Non-Diagnostic Clinical Note */}
               <div className="p-4 bg-stone-50 border border-stone-200 rounded-lg text-xs text-stone-700 leading-relaxed">
