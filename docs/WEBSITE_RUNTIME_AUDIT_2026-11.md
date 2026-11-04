@@ -7,7 +7,7 @@
 
 ## Executive findings
 
-Eleven reproducible or directly verifiable issues were identified. Targeted corrections are included in this branch; final browser workflow status must be checked before merge.
+Eleven reproducible or directly verifiable issues were identified and corrected. Latest-head CI and browser/accessibility checks passed; the PR remains draft because the Vercel preview is rate-limited and external integrations still need owner verification.
 
 | Severity | Finding | Evidence | Correction |
 |---|---|---|---|
@@ -56,8 +56,8 @@ Eleven reproducible or directly verifiable issues were identified. Targeted corr
 - The new search-shortcut browser test failed against the old header hint at run `41805363000` (`Expected: Ctrl/⌘ K`, `Received: /`), as expected.
 - The privacy-page axe check then identified `label-content-name-mismatch` on the header search button at run `41805693075`; the accessible name was corrected to include the complete visible text. The search-dialog test now checks its localized name and Escape dismissal.
 - Fix-branch CI run `41804912023` passed content validation, TypeScript, unit tests, and the production frontend/server build.
-- On the later head, run `41805040247` completed validation, type-checking, unit tests, production build, and the Express health smoke-test step successfully; final job completion and browser workflow should still be checked before merge.
-- CI on head `aafc573` passed content validation, TypeScript, unit tests, production client/server build, and the Express `/api/health` smoke test. The browser/accessibility workflow is still running.
+- Latest-head CI run `41807089235` passed content validation, TypeScript, unit tests, production client/server build, and the Express `/api/health` smoke test.
+- Latest-head browser/accessibility run `41807089227` passed all 13 Playwright tests, including trilingual legal routes, responsive widths, self-reflection flows and mobile taps, recall-period copy, search shortcut/dialog dismissal, and the serious/critical axe scan.
 - The Vercel check for the latest PR head is failing because the account hit its build-rate limit; this is an external preview-build blocker, not evidence of an application compile failure. No live preview for the latest head is available.
 - No real Gemini request was made because deployment secrets were not accessed. No production deployment or environment settings were changed.
 
@@ -74,4 +74,4 @@ Eleven reproducible or directly verifiable issues were identified. Targeted corr
 
 ## Release decision
 
-Keep PR #8 in draft until the latest CI and browser/accessibility workflows finish, the Docker container path is verified, and a deployment owner checks real Gemini and Upstash integrations. Merge does not equal deployment. Clinical content, instrument permissions, translations, helpline details, and independent clinical sign-off require appropriate human review.
+Keep PR #8 in draft until a deployment owner verifies real Gemini and Upstash integrations and the self-hosted Docker image/container path. CI and browser/accessibility checks pass, but the Vercel preview is currently blocked by the account build-rate limit. Merge does not equal deployment. Clinical content, instrument permissions, translations, helpline details, and independent clinical sign-off require appropriate human review.
