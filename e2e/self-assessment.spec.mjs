@@ -120,3 +120,10 @@ test('self-reflection notice respects the different recall periods of each tool'
     await expect(page.getByText(/Scores reflect subjective emotional distress over the past 2 weeks/i)).toHaveCount(0);
   }
 });
+
+test('search keyboard shortcut matches its visible hint and opens search', async ({ page }) => {
+  await page.goto('/en');
+  await expect(page.locator('header kbd')).toHaveText('Ctrl/⌘ K');
+  await page.keyboard.press('Control+k');
+  await expect(page.getByRole('dialog')).toBeVisible();
+});
