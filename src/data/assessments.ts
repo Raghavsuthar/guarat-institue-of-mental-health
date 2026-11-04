@@ -334,9 +334,9 @@ export const screenersData: ScreenerTool[] = [
   {
     id: 'mdq',
     name: {
-      en: 'Mania / Hypomania Reflection (Mood Disorder Questionnaire - MDQ Concept)',
-      hi: 'मेनिया व हाइपोमेनिया आत्म-अवलोकन (MDQ शैक्षणिक चेकलिस्ट)',
-      gu: 'મેનિયા અને હાઈપોમેનિયા આત્મ-મૂલ્યાંકન (MDQ શૈક્ષણિક ટૂલ)',
+      en: 'Mood Pattern Reflection (adapted educational questions; not the MDQ)',
+      hi: 'मूड पैटर्न का आत्म-अवलोकन (अनुकूलित शैक्षणिक प्रश्न; MDQ नहीं)',
+      gu: 'મૂડ પેટર્નનું આત્મ-અવલોકન (બદલાયેલા શૈક્ષણિક પ્રશ્નો; MDQ નથી)',
     },
     purpose: {
       en: 'Educational reflection on whether you have experienced periods when you felt unusually high, irritable, hyper-energetic, or had racing thoughts distinctly different from your usual self.',
@@ -1006,11 +1006,11 @@ export const screenersData: ScreenerTool[] = [
     ],
   },
   {
-    id: 'pcl5',
+    id: 'pc-ptsd-5',
     name: {
-      en: 'PTSD Reflection (PC-PTSD-5 Primary Care Screener)',
-      hi: 'पीटीएसडी आत्म-अवलोकन (PC-PTSD-5 शैक्षणिक टूल)',
-      gu: 'PTSD આત્મ-મૂલ્યાંકન (PC-PTSD-5 શૈક્ષણિક ટૂલ)',
+      en: 'PTSD Reflection (PC-PTSD-5, 5-item primary-care screener)',
+      hi: 'पीटीएसडी आत्म-अवलोकन (PC-PTSD-5, 5 प्रश्नों वाला स्क्रीनर)',
+      gu: 'PTSD આત્મ-અવલોકન (PC-PTSD-5, 5 પ્રશ્નોનું સ્ક્રીનર)',
     },
     purpose: {
       en: 'Educational reflection evaluating whether past severe traumatic events continue to cause intrusive memories, hyperarousal, or emotional numbness.',
@@ -1071,7 +1071,7 @@ export const screenersData: ScreenerTool[] = [
     interpretations: [
       {
         minScore: 0,
-        maxScore: 2,
+        maxScore: 3,
         level: { en: 'Unlikely PTSD Screen', hi: 'पीटीएसडी की कम संभावना', gu: 'PTSD ની ઓછી શક્યતા' },
         description: {
           en: 'Your responses do not indicate high acute levels of post-traumatic stress symptomatology.',
@@ -1085,7 +1085,7 @@ export const screenersData: ScreenerTool[] = [
         },
       },
       {
-        minScore: 3,
+        minScore: 4,
         maxScore: 5,
         level: { en: 'Positive PTSD Screen (Evaluation Recommended)', hi: 'पीटीएसडी के संभावित लक्षण (जांच योग्य)', gu: 'PTSD ના પ્રબળ લક્ષણો (તપાસ જરૂરી)' },
         description: {
@@ -1200,9 +1200,9 @@ export const screenersData: ScreenerTool[] = [
   {
     id: 'epds',
     name: {
-      en: 'Postpartum Mood Reflection (EPDS Educational Tool)',
-      hi: 'प्रसवोत्तर मनोदशा अवलोकन (EPDS शैक्षणिक टूल)',
-      gu: 'પ્રસૂતિ પછીના મૂડનું મૂલ્યાંકન (EPDS શૈક્ષણિક ટૂલ)',
+      en: 'Postpartum Mood Reflection (adapted educational questions; not the EPDS)',
+      hi: 'प्रसव के बाद मनोदशा का आत्म-अवलोकन (अनुकूलित शैक्षणिक प्रश्न; EPDS नहीं)',
+      gu: 'પ્રસૂતિ પછીના મૂડનું આત્મ-અવલોકન (બદલાયેલા શૈક્ષણિક પ્રશ્નો; EPDS નથી)',
     },
     purpose: {
       en: 'Educational reflection for mothers within the first year after childbirth on mood, anxiety, and bonding difficulties.',
