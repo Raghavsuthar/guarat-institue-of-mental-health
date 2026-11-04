@@ -30,6 +30,22 @@ const unsafeClinicalCopyPatterns: Array<{ label: string; pattern: RegExp }> = [
     pattern: /highest medical mortality rate of any psychiatric condition/i,
   },
   {
+    label: 'unsupported remission percentages across eating, anxiety, personality, and perinatal conditions',
+    pattern: /(?:60% to 75%|70% to 80%|75% to 85%|85% to 90%)[^.]{0,180}(?:achieve|individuals|patients|women|mothers|remission|improvement|cessation|freedom)/i,
+  },
+  {
+    label: 'overstated diagnostic-tool accuracy',
+    pattern: /sensitivity and specificity exceeding 90%/i,
+  },
+  {
+    label: 'blanket medication safety claims during breastfeeding',
+    pattern: /(?:completely|fully) safe[^.]{0,100}breastfeeding|breastfeeding[^.]{0,100}(?:completely|fully) safe/i,
+  },
+  {
+    label: 'universal postpartum screening detection-rate claim',
+    pattern: /detects more than 85% of maternal mood disorders/i,
+  },
+  {
     label: 'simplistic neurotransmitter-balance explanation of antipsychotic action',
     pattern: /antipsychotics work by keeping neurotransmitters balanced/i,
   },
