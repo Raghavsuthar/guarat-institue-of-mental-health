@@ -124,6 +124,7 @@ test('self-reflection notice respects the different recall periods of each tool'
 test('search keyboard shortcut matches its visible hint and opens search', async ({ page }) => {
   await page.goto('/en');
   await expect(page.locator('header kbd')).toHaveText('Ctrl/⌘ K');
+  await expect(page.getByRole('button', { name: /Search topics Ctrl\/⌘ K/i })).toBeVisible();
   await page.keyboard.press('Control+k');
   const searchDialog = page.getByRole('dialog', { name: /global search/i });
   await expect(searchDialog).toBeVisible();
