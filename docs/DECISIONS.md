@@ -253,3 +253,22 @@ The repository already contains evidence guides for all 23 main conditions, but 
 ### Release gate
 
 The branch must pass content validation, TypeScript checks, all tests, and the production build in CI. Even a green software build does not constitute clinical sign-off or prove translation equivalence. The PR remains draft and must not be treated as deployed until merged and verified in the hosting environment.
+
+
+## 2026-11-04 — Website runtime reliability fixes
+
+### Decision
+
+- Keep the runtime repair separate from the merged clinical-content work and from dependency upgrades.
+- Use one shared Gemini model constant and one shared Q&A safety prompt across Vercel, Express, and local Vite execution paths.
+- Make the documented build contract real: validation, sitemap generation, Vite client output, and an esbuild CommonJS Express bundle.
+- Fix the mobile test assertion rather than changing working answer-selection UI; the workflow trace showed the tap itself succeeded.
+- Keep PR #8 draft until final-head CI is green and deployment-owner verification covers actual Gemini/Upstash credentials and runtime startup.
+
+### Rationale
+
+The previous build command could not produce the artifact required by the Dockerfile/start command. The Gen AI SDK documentation requires explicit API-key configuration and documents the selected Flash alias. The browser workflow failure was a test matcher defect, not an application tap defect.
+
+### Release gate
+
+A green GitHub build proves compilation and automated checks only. It does not prove production secrets, external services, Docker startup, live deployment, clinical content, or translations.
