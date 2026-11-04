@@ -84,3 +84,31 @@ test('self-harm endorsement shows support before questionnaire completion', asyn
   await expect(safetyAlert.getByRole('link', { name: /Call 112/i })).toHaveAttribute('href', 'tel:112');
   await expect(safetyAlert.getByRole('link', { name: /Call 14416/i })).toHaveAttribute('href', 'tel:14416');
 });
+
+
+test('self-reflection cards and scale answers respond to real mobile taps', async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    screen: { width: 390, height: 844 },
+    isMobile: true,
+    hasTouch: true,
+  });
+  const page = await context.newPage();
+
+  try {
+    await page.goto('/en/interactive');
+
+    const launchButton = page.getByRole('button', { name: /Launch Reflection Tool/i }).first();
+    await launchButton.tap();
+
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toBeVisible();
+
+    const firstAnswer = dialog.getByTestId('screener-answer').first();
+    await firstAnswer.tap();
+    await expect(firstAnswer).toHaveAttribute('aria-pressed', 'true');
+    await expect(dialog.getByText(/1 of \\d+ answered/i)).toBeVisible();
+  } finally {
+    await context.close();
+  }
+});
