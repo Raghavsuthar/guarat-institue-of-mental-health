@@ -49,8 +49,8 @@
 3. **Medication discontinuation:** Replaced inevitable-relapse language with a risk-based explanation and advice to discuss changes with the treating clinician.
 4. **Autism assessment:** Clarified that structured tools contribute to a comprehensive assessment and must not be used alone to diagnose autism.
 5. **Additional anxiety and sleep outcomes:** Removed fixed treatment-response/remission percentages from generalized anxiety disorder, panic disorder, and insomnia copy.
-5. **Perinatal safety:** Replaced blanket statements about medication being completely safe during breastfeeding with individualized consideration of maternal symptoms, previous response, infant factors, benefits, and risks.
-6. **Screening and investigations:** Clarified that screening is not diagnosis and that laboratory investigations should be guided by clinical history/examination rather than described as mandatory for everyone.
+6. **Perinatal safety:** Replaced blanket statements about medication being completely safe during breastfeeding with individualized consideration of maternal symptoms, previous response, infant factors, benefits, and risks.
+7. **Screening and investigations:** Clarified that screening is not diagnosis and that laboratory investigations should be guided by clinical history/examination rather than described as mandatory for everyone.
 
 ## Sources opened for targeted corrections
 
