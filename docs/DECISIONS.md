@@ -279,3 +279,10 @@ A green GitHub build proves compilation and automated checks only. It does not p
 - Broaden crisis-language detection for high-signal expressions already represented by regression tests; crisis detection remains an escalation heuristic, not a clinical assessment.
 - Load server-only `.env` configuration in local Vite middleware and the standalone Express runtime. Do not use `VITE_` prefixes for secrets.
 - Exercise the self-hosted production server in CI with a health-endpoint smoke test after building its bundle.
+
+
+### Search accessibility and final audit scope
+
+- Give the search dialog a localized accessible name and a working Escape dismissal; keep its shortcut hint synchronized with the actual Ctrl/⌘+K handler.
+- Keep the shared questionnaire notice explicit about each tool's own recall period; do not imply all tools measure the same two-week window.
+- Treat a Vercel build-rate-limit failure as an external preview blocker, not a code pass or code failure. CI and browser checks remain separate release gates.
