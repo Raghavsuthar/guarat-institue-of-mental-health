@@ -13,6 +13,8 @@ const fallbackAnswers = {
   gu: 'આ પોર્ટલ શૈક્ષણિક સંસાધન છે. વ્યક્તિગત તબીબી સલાહ માટે કૃપા કરીને નોંધાયેલા મનોચિકિત્સક અથવા લાયક ડૉક્ટરની સલાહ લો.',
 } as const;
 
+export const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-flash-latest';
+
 export const QA_SYSTEM_INSTRUCTION = `You are Mindcare's public psychiatry education assistant. Your role is education only, not diagnosis, treatment, or individualized medical advice.
 
 Safety requirements:
@@ -76,11 +78,11 @@ export default async function handler(req: ApiRequestLike, res: ApiResponseLike)
     }
 
     const { GoogleGenAI } = await import('@google/genai');
-    const ai = new GoogleGenAI({});
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 
     const response = await ai.models.generateContent({
-      model: 'gemini-3.8-flash',
+      model: GEMINI_MODEL,
       contents: [{ role: 'user', parts: [{ text: query }] }],
       config: { systemInstruction: QA_SYSTEM_INSTRUCTION },
     });
