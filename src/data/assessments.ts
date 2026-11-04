@@ -89,9 +89,9 @@ export const screenersData: ScreenerTool[] = [
       {
         id: 5,
         text: {
-          en: 'Poor appetite, skipping meals, or noticeable overeating',
-          hi: 'भूख में कमी, खाना न पचना, या जरूरत से ज्यादा खाना',
-          gu: 'ભૂખ ન લાગવી કે જરૂર કરતાં વધુ ખાવું',
+          en: 'Poor appetite or overeating',
+          hi: 'भूख कम लगना या जरूरत से ज्यादा खाना',
+          gu: 'ભૂખ ઓછી લાગવી કે જરૂર કરતાં વધુ ખાવું',
         },
       },
       {
@@ -176,17 +176,32 @@ export const screenersData: ScreenerTool[] = [
       },
       {
         minScore: 15,
-        maxScore: 27,
-        level: { en: 'Moderately Severe to Severe Symptoms', hi: 'गंभीर स्तर के लक्षण', gu: 'ગંભીર સ્તરના લક્ષણો' },
+        maxScore: 19,
+        level: { en: 'Moderately Severe Symptoms', hi: 'मध्यम से गंभीर लक्षण', gu: 'મધ્યમથી ગંભીર લક્ષણો' },
         description: {
-          en: 'Your responses reflect substantial distress and multiple symptoms that strongly impact functioning. Effective, scientific treatments are widely available.',
-          hi: 'आपके उत्तर काफी तनाव और कई गंभीर लक्षणों का संकेत देते हैं जो दैनिक जीवन को प्रभावित कर रहे हैं। इनके लिए प्रभावी और सुरक्षित चिकित्सा उपलब्ध है।',
-          gu: 'તમારા જવાબો ગંભીર તણાવ દર્શાવે છે જે જીવનને અસ્તવ્યસ્ત કરી શકે છે. આના માટે અકસીર તબીબી સારવાર ઉપલબ્ધ છે.',
+          en: 'Your responses indicate a substantial burden of depressive symptoms. This is not a diagnosis; a timely clinical assessment is recommended.',
+          hi: 'आपके उत्तर अवसाद संबंधी लक्षणों का उल्लेखनीय बोझ दर्शाते हैं। यह निदान नहीं है; समय पर चिकित्सकीय मूल्यांकन कराएं।',
+          gu: 'તમારા જવાબો ડિપ્રેશન સંબંધિત લક્ષણોનો નોંધપાત્ર ભાર દર્શાવે છે. આ નિદાન નથી; સમયસર તબીબી મૂલ્યાંકન કરાવો.',
         },
         recommendation: {
-          en: 'Please arrange a comprehensive psychiatric evaluation promptly. If you are struggling with safety or despair, contact Tele-MANAS at 14416 (24x7, free).',
-          hi: 'कृपया बिना देरी किए मनोचिकित्सक से संपर्क करें। यदि मन में कोई आत्मघाती विचार आ रहे हैं, तो तुरंत 14416 पर कॉल करें।',
-          gu: 'કૃપા કરીને તરત જ મનોચિકિત્સકનો સંપર્ક કરો. જો મનમાં જીવન ટૂંકાવવાના વિચારો આવતા હોય તો ૧૪૪૧૬ પર કૉલ કરો.',
+          en: 'Arrange a clinical assessment with a qualified healthcare professional. Any self-harm thoughts need prompt attention regardless of the total score.',
+          hi: 'योग्य स्वास्थ्य विशेषज्ञ से चिकित्सकीय मूल्यांकन कराएं। कुल स्कोर चाहे जो हो, खुद को नुकसान के विचारों पर तुरंत ध्यान देना जरूरी है।',
+          gu: 'યોગ્ય આરોગ્ય નિષ્ણાત પાસે તબીબી મૂલ્યાંકન કરાવો. કુલ સ્કોર ગમે તે હોય, પોતાને નુકસાનના વિચારોને તાત્કાલિક ધ્યાન આપવું જરૂરી છે.',
+        },
+      },
+      {
+        minScore: 20,
+        maxScore: 27,
+        level: { en: 'Severe Symptoms', hi: 'गंभीर लक्षण', gu: 'ગંભીર લક્ષણો' },
+        description: {
+          en: 'Your responses indicate a high burden of depressive symptoms. This is not a diagnosis and requires prompt clinical assessment.',
+          hi: 'आपके उत्तर अवसाद संबंधी लक्षणों का अधिक बोझ दर्शाते हैं। यह निदान नहीं है और शीघ्र चिकित्सकीय मूल्यांकन आवश्यक है।',
+          gu: 'તમારા જવાબો ડિપ્રેશન સંબંધિત લક્ષણોનો ઊંચો ભાર દર્શાવે છે. આ નિદાન નથી અને વહેલું તબીબી મૂલ્યાંકન જરૂરી છે.',
+        },
+        recommendation: {
+          en: 'Please arrange a prompt clinical assessment. If you may act on self-harm thoughts or cannot stay safe, seek emergency help now.',
+          hi: 'कृपया शीघ्र चिकित्सकीय मूल्यांकन कराएं। यदि आप खुद को नुकसान पहुंचा सकते हैं या सुरक्षित नहीं रह सकते, तो अभी आपातकालीन सहायता लें।',
+          gu: 'કૃપા કરીને વહેલું તબીબી મૂલ્યાંકન કરાવો. જો તમે પોતાને નુકસાન પહોંચાડી શકો તેમ હોય અથવા સુરક્ષિત ન રહી શકો, તો હમણાં જ ઇમરજન્સી મદદ લો.',
         },
       },
     ],
@@ -242,9 +257,9 @@ export const screenersData: ScreenerTool[] = [
       {
         id: 4,
         text: {
-          en: 'Trouble relaxing or sitting still',
-          hi: 'शांत बैठने या आराम महसूस करने में परेशानी होना',
-          gu: 'શાંતિથી બેસવામાં કે આરામ કરવામાં મુશ્કેલી',
+          en: 'Trouble relaxing',
+          hi: 'आराम महसूस करने में कठिनाई होना',
+          gu: 'આરામ કરવામાં મુશ્કેલી થવી',
         },
       },
       {
@@ -981,17 +996,32 @@ export const screenersData: ScreenerTool[] = [
       },
       {
         minScore: 6,
-        maxScore: 10,
-        level: { en: 'Substantial / Severe Substance Use Disorder', hi: 'गंभीर नशा निर्भरता (तत्काल इलाज योग्य)', gu: 'ગંભીર વ્યસન (તાત્કાલિક સારવાર)' },
+        maxScore: 8,
+        level: { en: 'Substantial Level', hi: 'काफी अधिक स्तर', gu: 'નોંધપાત્ર સ્તર' },
         description: {
-          en: 'Score indicates high severity dependence with dangerous physiological or social consequences.',
-          hi: 'गंभीर स्तर की निर्भरता जिसमें शारीरिक व मानसिक नुकसान का बहुत अधिक खतरा है।',
-          gu: 'ગંભીર સ્તરનું વ્યસન જે શરીર અને મગજ માટે જીવલેણ બની શકે છે.',
+          en: 'This score range indicates substantial drug-related problems and warrants a comprehensive clinical assessment.',
+          hi: 'यह स्कोर सीमा नशीली दवाओं से जुड़ी उल्लेखनीय समस्याओं का संकेत देती है और विस्तृत चिकित्सकीय मूल्यांकन आवश्यक है।',
+          gu: 'આ સ્કોર શ્રેણી નશીલા પદાર્થો સંબંધિત નોંધપાત્ર સમસ્યાઓ દર્શાવે છે અને વિગતવાર તબીબી મૂલ્યાંકન જરૂરી છે.',
         },
         recommendation: {
-          en: 'Comprehensive psychiatric and addiction assessment with medically supervised detoxification is urgently advised.',
-          hi: 'बिना देर किए अस्पताल या मनोचिकित्सक से संपर्क करें। सुरक्षित मेडिकल डिटॉक्स जरूरी है।',
-          gu: 'તબીબી દેખરેખ હેઠળ સુરક્ષિત ડિટોક્સ અને સારવાર તાત્કાલિક જરૂરી છે.',
+          en: 'Arrange an assessment with a qualified addiction or mental-health professional.',
+          hi: 'योग्य नशा-मुक्ति या मानसिक स्वास्थ्य विशेषज्ञ से मूल्यांकन कराएं।',
+          gu: 'યોગ્ય વ્યસનમુક્તિ અથવા માનસિક આરોગ્ય નિષ્ણાત પાસે મૂલ્યાંકન કરાવો.',
+        },
+      },
+      {
+        minScore: 9,
+        maxScore: 10,
+        level: { en: 'Severe Level', hi: 'गंभीर स्तर', gu: 'ગંભીર સ્તર' },
+        description: {
+          en: 'This score range indicates a high level of drug-related problems and warrants prompt clinical assessment.',
+          hi: 'यह स्कोर सीमा नशीली दवाओं से जुड़ी गंभीर समस्याओं का संकेत देती है और शीघ्र चिकित्सकीय मूल्यांकन आवश्यक है।',
+          gu: 'આ સ્કોર શ્રેણી નશીલા પદાર્થો સંબંધિત ગંભીર સમસ્યાઓ દર્શાવે છે અને વહેલું તબીબી મૂલ્યાંકન જરૂરી છે.',
+        },
+        recommendation: {
+          en: 'Please arrange prompt assessment with a qualified addiction or mental-health professional.',
+          hi: 'कृपया योग्य नशा-मुक्ति या मानसिक स्वास्थ्य विशेषज्ञ से शीघ्र मूल्यांकन कराएं।',
+          gu: 'કૃપા કરીને યોગ્ય વ્યસનમુક્તિ અથવા માનસિક આરોગ્ય નિષ્ણાત પાસે વહેલું મૂલ્યાંકન કરાવો.',
         },
       },
     ],
