@@ -47,5 +47,5 @@ Added trilingual public-facing evidence summaries for the ten existing condition
 - Removed fixed cure, remission, or response percentages where they were presented without adequate claim-level qualification; softened deterministic genetic and single-neurotransmitter explanations.
 - Clarified that autism assessment tools do not independently establish diagnosis; screening is not diagnosis; and breastfeeding medication decisions require individualized review.
 - Added `tests/clinical-copy-safety.test.ts` to prevent reintroduction of the identified high-risk overclaims.
-- Regression test was observed failing against the pre-correction content. Final passing status is pending CI after all edits.
+- Regression test failed against the pre-correction content for the identified overclaim patterns and passed after correction. Final-head CI passed content validation, TypeScript/lint, all tests, and the production build; browser smoke, responsive, and axe checks also passed.
 - No new conditions, medications/doses, helplines, reviewer credentials, or clinical-review claims were added.
