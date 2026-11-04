@@ -900,7 +900,7 @@ export const newConditionsBatch3: Condition[] = [
           gu: 'શું સ્તનપાન કરાવતી વખતે દવાઓ લઈ શકાય?',
         },
         answer: {
-          en: 'Some antidepressants, including sertraline, may be options during breastfeeding. The decision should be individualized with a clinician, considering maternal symptoms and previous response, the infant's health and age, and potential benefits and risks.',
+          en: 'Some antidepressants, including sertraline, may be options during breastfeeding. The decision should be individualized with a clinician, considering maternal symptoms and previous response, infant health and age, and potential benefits and risks.',
           hi: 'कुछ एंटीडिप्रेसेंट स्तनपान के दौरान विकल्प हो सकते हैं। माँ के लक्षणों और पहले के उपचार, शिशु के स्वास्थ्य और उम्र तथा संभावित लाभ-जोखिम पर विचार करके चिकित्सक के साथ व्यक्तिगत निर्णय लेना चाहिए।',
           gu: 'કેટલીક એન્ટીડિપ્રેસન્ટ દવાઓ સ્તનપાન દરમિયાન વિકલ્પ હોઈ શકે છે. માતાના લક્ષણો અને અગાઉની સારવાર, બાળકનું આરોગ્ય અને ઉંમર તથા સંભવિત લાભ-જોખમ ધ્યાનમાં રાખીને તબીબ સાથે વ્યક્તિગત નિર્ણય લેવો જોઈએ.',
         },
