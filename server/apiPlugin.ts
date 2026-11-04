@@ -2,6 +2,7 @@
 import path from 'path';
 import { Plugin } from 'vite';
 import { hasValidAdminToken, isCrisisQuery } from './shared/analytics';
+import { GEMINI_MODEL } from '../api/qa';
 
 const DATA_FILE = path.resolve('.analytics-data-dev.json');
 
@@ -255,7 +256,7 @@ export function apiServerPlugin(): Plugin {
               }
 
               const { GoogleGenAI } = await import('@google/genai');
-              const ai = new GoogleGenAI({});
+              const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
               const systemInstruction = `You are an educational assistant for Gujarat Institute of Mental Health's Public Psychiatry Education platform (gujarat-institute-of-mental-health.in).
 Gujarat Institute of Mental Health is a public mental health education platform in India dedicated to destigmatizing mental health and addiction science.
@@ -271,7 +272,7 @@ MANDATORY SAFETY AND ETHICAL BOUNDARIES:
 8. Always conclude with a calm reminder: "This information is for education only. Please consult a registered psychiatrist or MBBS doctor for an individualized clinical assessment."`;
 
               const response = await ai.models.generateContent({
-                model: 'gemini-3.8-flash',
+                model: GEMINI_MODEL,
                 contents: [{ role: 'user', parts: [{ text: query }] }],
                 config: {
                   systemInstruction,
