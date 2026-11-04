@@ -477,7 +477,7 @@ const baseConditionsData: Condition[] = [
     evidenceHighlights: [
       {
         fact: {
-          en: 'Family and twin studies suggest that inherited factors contribute substantially to bipolar disorder risk. Heritability estimates describe populations, do not determine the outcome for any one person; life experiences and other factors also influence how the condition develops.',
+          en: 'Family and twin studies suggest that inherited factors contribute substantially to bipolar disorder risk. Heritability estimates describe populations; they do not determine the outcome for any one person. Life experiences and other factors also influence how the condition develops.',
           hi: 'जुड़वां और पारिवारिक अध्ययनों से पता चलता है कि आनुवंशिक कारक बायपोलर डिसऑर्डर के जोखिम में महत्वपूर्ण योगदान देते हैं। आनुवंशिकता के अनुमान आबादी के स्तर पर होते हैं; वे किसी व्यक्ति का भविष्य तय नहीं करते। जीवन के अनुभव और अन्य कारक भी प्रभाव डालते हैं।',
           gu: 'જોડિયા અને પારિવારિક અભ્યાસો દર્શાવે છે કે આનુવંશિક પરિબળો બાયપોલર ડિસઓર્ડરના જોખમમાં મહત્વનો ફાળો આપે છે. વારસાગતતાના અંદાજો વસ્તીના સ્તરે લાગુ પડે છે; તે કોઈ વ્યક્તિનું ભવિષ્ય નક્કી કરતા નથી. જીવનના અનુભવો અને અન્ય પરિબળો પણ અસર કરે છે.',
         },
