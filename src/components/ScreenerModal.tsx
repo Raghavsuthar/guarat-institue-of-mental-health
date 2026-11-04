@@ -116,7 +116,7 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
                   handleReset();
                 }}
                 aria-pressed={selectedToolId === tool.id}
-                aria-label={`Open ${tool.name[currentLang]}`}
+                aria-label={`Select ${tool.id}: ${tool.name[currentLang]}`}
                 className={`px-3 py-1.5 rounded-md text-xs font-semibold transition cursor-pointer min-h-[44px] flex items-center whitespace-nowrap ${
                   selectedToolId === tool.id
                     ? 'bg-[#115e59] text-white'
@@ -159,6 +159,7 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
                   return (
                     <div
                       key={q.id}
+                      data-testid="screener-question"
                       className={`p-4 rounded-lg border transition ${
                         q.isCrisisQuestion
                           ? 'border-[#fecaca] bg-[#fef2f2]'
@@ -181,6 +182,7 @@ export const ScreenerModal: React.FC<ScreenerModalProps> = ({
                           return (
                             <button
                               key={opt.value}
+                              data-testid="screener-answer"
                               onClick={() => handleAnswer(q.id, opt.value)}
                               aria-pressed={isSelected}
                               className={`p-2.5 rounded-md text-xs font-medium border text-center transition cursor-pointer min-h-[44px] flex items-center justify-center ${
