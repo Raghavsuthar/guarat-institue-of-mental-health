@@ -8,7 +8,7 @@ The repository documents and configures a self-hosted production server and Dock
 - Keep Express and other npm packages external in the bundle so the production install can supply them.
 - Make `npm run build` perform the repository's documented validation, sitemap generation, frontend build, and server bundle steps.
 - Add a dependency-free smoke check that starts the production server and verifies JSON health plus the SPA fallback.
-- Make CI use the lockfile strictly and build the Docker image.
+- Make CI use the lockfile strictly, build the Docker image, and run the container for a production-route smoke check.
 
 ## Non-goals
 - No changes to Vercel Functions or their deployment behavior.
@@ -24,5 +24,5 @@ The repository documents and configures a self-hosted production server and Dock
 - Preserve Node.js 22 and npm lockfile reproducibility.
 - Keep `server.cjs` in CommonJS format and externalize npm packages.
 - A smoke test must start the built server, assert `GET /api/health` returns JSON with `status: ok`, and assert a language-prefixed route returns the SPA HTML.
-- CI must run validation, type-checking, unit tests, production build, server smoke test, and Docker build.
+- CI must run validation, type-checking, unit tests, production build, server smoke test, Docker build, and Docker-container health/SPA checks.
 - The smoke test must clean up its child process on success and failure.

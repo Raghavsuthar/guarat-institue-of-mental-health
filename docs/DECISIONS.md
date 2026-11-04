@@ -231,3 +231,14 @@ Implementation PRs #13 (API hardening), #15–#16 (visual/accessibility polish),
 - Rationale: the site is public-facing mental-health education; the interface should feel calm and approachable without weakening clinical clarity or emergency visibility.
 - Scope: CSS design layer and header accent only in this change. No clinical content, screening behavior, language routes, API behavior, or data handling is intentionally changed.
 - Verification: pending CI and preview review; do not describe this as production-applied until the PR is merged and deployed.
+
+
+## 2026-11-04 — Build the Express production entry point
+
+**Status:** Implemented on `improve/docker-server-build`, PR #1; CI and browser/accessibility workflows passed. Not merged or deployed.
+
+- Decision: keep the existing Express server and use the already-installed esbuild dependency to bundle `server.ts` to `dist/server.cjs` as Node 22 CommonJS, externalizing npm packages.
+- Rationale: `npm start` and the Dockerfile already require `dist/server.cjs`, but the previous build generated only the Vite frontend. The test-first smoke check reproduced the missing runtime artifact before the fix.
+- Build order: content validation, sitemap generation, Vite build, then Express bundle. CI now uses strict `npm ci`, smoke-tests the built server, builds the Docker image, and starts the container to test its health endpoint and SPA fallback.
+- Verification: PR head `b1027b4`; CI run 41768135612 passed and browser/accessibility run 41768135622 passed all 7 tests.
+- Remaining risk: the same CI audit reports 19 dependency advisories (3 low, 10 moderate, 5 high, 1 critical). This change does not clear or remediate them; see `docs/AUDIT.md`.
