@@ -67,10 +67,10 @@ export const InteractiveView: React.FC<InteractiveViewProps> = ({
           </p>
           <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
             {currentLang === 'en'
-              ? 'Scores reflect subjective emotional distress over the past 2 weeks. Comprehensive psychiatric evaluations require direct clinical interview, exploration of medical history, and exclusion of endocrine or neurological conditions.'
+              ? 'Each questionnaire uses its own stated recall period. Responses are for reflection only and do not establish a diagnosis. A clinician can interpret them in context, including your medical history and other relevant factors.'
               : currentLang === 'hi'
-              ? 'यह केवल पिछले 2 सप्ताह की मानसिक स्थिति का सारांश है। सही जांच के लिए डॉक्टर से व्यक्तिगत परामर्श जरूरी है।'
-              : 'આ માત્ર છેલ્લા ૨ અઠવાડિયાની સ્થિતિ દર્શાવે છે. સાચી તપાસ માટે ડૉક્ટરને રૂબરૂ મળવું જરૂરી છે.'}
+              ? 'हर प्रश्नावली में उसकी अपनी बताई गई समय-अवधि लागू होती है। उत्तर केवल आत्म-अवलोकन के लिए हैं और अपने आप में निदान नहीं करते। चिकित्सक इन्हें आपके चिकित्सा इतिहास और अन्य पहलुओं के संदर्भ में समझ सकते हैं।'
+              : 'દરેક પ્રશ્નાવલીમાં તેમાં જણાવેલો પોતાનો સમયગાળો લાગુ પડે છે. જવાબો માત્ર આત્મ-અવલોકન માટે છે અને પોતે નિદાન કરતા નથી. તબીબ તેને તમારા તબીબી ઇતિહાસ અને અન્ય સંબંધિત પરિબળો સાથે સમજી શકે છે.'}
           </p>
         </div>
       </div>
