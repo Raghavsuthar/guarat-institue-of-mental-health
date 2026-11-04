@@ -56,8 +56,9 @@ Eleven reproducible or directly verifiable issues were identified and corrected.
 - The new search-shortcut browser test failed against the old header hint at run `41805363000` (`Expected: Ctrl/⌘ K`, `Received: /`), as expected.
 - The privacy-page axe check then identified `label-content-name-mismatch` on the header search button at run `41805693075`; the accessible name was corrected to include the complete visible text. The search-dialog test now checks its localized name and Escape dismissal.
 - Fix-branch CI run `41804912023` passed content validation, TypeScript, unit tests, and the production frontend/server build.
-- Latest-head CI run `41807089235` passed content validation, TypeScript, unit tests, production client/server build, and the Express `/api/health` smoke test.
-- Latest-head browser/accessibility run `41807089227` passed all 13 Playwright tests, including trilingual legal routes, responsive widths, self-reflection flows and mobile taps, recall-period copy, search shortcut/dialog dismissal, and the serious/critical axe scan.
+- Latest completed CI run `41807442371` passed dependency-audit reporting, trilingual content validation, TypeScript/lint, API safety tests, production frontend/server build, and the self-hosted Express health smoke test.
+- Latest completed browser/accessibility run `41807442403` passed all 13 Playwright tests, including trilingual legal routes, responsive widths, self-reflection flows and mobile taps, recall-period copy, search shortcut/dialog dismissal, and the serious/critical axe scan.
+- The current branch head subsequently adds richer axe failure diagnostics to the test only; re-run both workflows on the final PR head before merge.
 - The Vercel check for the latest PR head is failing because the account hit its build-rate limit; this is an external preview-build blocker, not evidence of an application compile failure. No live preview for the latest head is available.
 - No real Gemini request was made because deployment secrets were not accessed. No production deployment or environment settings were changed.
 
